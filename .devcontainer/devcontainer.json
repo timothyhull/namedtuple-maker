@@ -1,0 +1,19 @@
+{
+    "name": "namedtuple Maker Dev Container",
+    "build": {
+        "dockerfile": "../Dockerfile",
+        "context": ".."
+    },
+    "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-azuretools.vscode-docker"
+    ],
+    "settings": {
+        "python.analysis.useImportHeuristic": true,
+        "python.pythonPath": "/usr/local/bin/python3",
+        "python.formatting.provider": "autopep8",
+        "python.linting.enabled": true,
+        "python.linting.flake8Enabled": true,
+    }
+}
