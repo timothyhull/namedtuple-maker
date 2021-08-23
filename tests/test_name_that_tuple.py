@@ -1,12 +1,12 @@
 #!/usr/bin/env pytest
-''' pytest tests for name_that_tuple.py
+''' pytest tests for namedtuple_maker.py
 
     Usage:
-        pytest test_name_that_tuple.py name_that_tuple.py
+        pytest test_namedtuple_maker.py namedtuple_maker.py
 '''
 
 # Imports
-from _24.name_that_tuple import TEST_DATA, tuple_tester, named_tuple_converter
+from namedtuple_maker import TEST_DATA, tuple_tester, named_tuple_converter
 from collections import namedtuple
 from pytest import mark
 from typing import Iterable
