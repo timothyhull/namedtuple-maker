@@ -1,15 +1,15 @@
 # namedtuple Maker Development Container
 FROM python:3.9-slim-buster
 
-WORKDIR /workspaces
+WORKDIR /workspaces/namedtuple-maker
 
 RUN apt-get update && \
     apt-get install -y git
 
-COPY requirements.txt requirements.txt
+COPY requirements/ requirements/
 
 RUN python -m pip install --upgrade pip && \
-    python -m pip install -r requirements.txt
+    python -m pip install -r requirements/requirements.txt
 
 ENV PYTHONPATH=/workspaces/namedtuple-maker
 
