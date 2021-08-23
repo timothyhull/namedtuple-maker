@@ -1,3 +1,6 @@
+# Python development
+ipython
+
 # Python linting
 autopep8
 flake8
