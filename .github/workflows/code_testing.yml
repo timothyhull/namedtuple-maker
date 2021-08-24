@@ -22,23 +22,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Lint Python files
-      - name: flake8
+      # Install testing packages
+      - name: Install testing packages
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements/requirements.txt
+
+      # Lint Python files with flake8
+      - name: Lint Python files with flake8
         run: |
           flake8 . --count --show-source --statistics
 
-      # Lint YAML files
-      - name: yamllint
+      # Lint YAML files with yamllint
+      - name: Lint YAML files yamllint
         run: |
           yamllint .
 
-      # Static code analysis
-      - name: bandit
+      # Static code analysis with bandit
+      - name: Static code analysis with bandit
         run: |
           bandit -rc .bandit.yml .
 
-      # Python tests
-      - name: pytest
+      # Python application tests with pytest
+      - name: Python application tests with pytest
         run: |
           pytest tests/
 
