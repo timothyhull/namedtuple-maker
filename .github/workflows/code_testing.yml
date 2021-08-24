@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PYTHONPATH: /~.
+      PYTHONPATH: ./
 
     steps:
       # Checkout repository code
