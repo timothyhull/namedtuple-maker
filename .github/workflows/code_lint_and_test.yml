@@ -46,7 +46,6 @@ jobs:
           files: .
           config_file: .markdownlint.json
 
-jobs:
   testing:
     name: Test repository files
     runs-on: ubuntu-latest
