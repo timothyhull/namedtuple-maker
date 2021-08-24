@@ -49,7 +49,7 @@ jobs:
       # Python application tests with pytest
       - name: Python application tests with pytest
         run: |
-          export PYTHONPATH:${{ env.PYTHONPATH }}
+          export $PYTHONPATH:${{ env.PYTHONPATH }}
           pytest tests/
 
       # Lint markdown files
