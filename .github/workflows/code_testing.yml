@@ -15,6 +15,9 @@ jobs:
     name: Lint repository files
     runs-on: ubuntu-latest
 
+    env:
+      PYTHONPATH: PYTHONPATH=/workspaces/namedtuple-maker:/~.
+
     steps:
       # Checkout repository code
       # checkout@v2 action documentation
@@ -46,6 +49,7 @@ jobs:
       # Python application tests with pytest
       - name: Python application tests with pytest
         run: |
+          export {{ PYTHONPATH }}
           pytest tests/
 
       # Lint markdown files
