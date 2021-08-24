@@ -8,3 +8,9 @@ flake8
 # Python testing
 pytest
 pytest-cov
+
+# Static code analysis
+bandit
+
+# YAML linting
+yamllint
