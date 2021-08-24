@@ -22,16 +22,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Static code analysis with bandit
-      - name: Static code analysis with bandit
-        run: |
-          bandit -rc .bandit.yml .
-
       # Install testing packages
       - name: Install test packages
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements/requirements.txt
+
+      # Static code analysis with bandit
+      - name: Static code analysis with bandit
+        run: |
+          bandit -rc .bandit.yml .
 
       # Lint Python files with flake8
       - name: Lint Python files with flake8
