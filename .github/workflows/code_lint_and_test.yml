@@ -1,8 +1,8 @@
 ---
-# This action performs a lint of files in the repository
+# This action performs a code linting and testing of files in the repository
 
 # Name of the action
-name: Linting
+name: Lint and Test Code
 
 # Events which trigger the action
 on:
@@ -11,12 +11,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  markdownlint:
+  linting:
     name: Lint repository files
     runs-on: ubuntu-latest
-
-    env:
-      PYTHONPATH: ./
 
     steps:
       # Checkout repository code
@@ -24,12 +21,6 @@ jobs:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      # Install testing packages
-      - name: Install testing packages
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements/requirements.txt
 
       # Lint Python files with flake8
       - name: Lint Python files with flake8
@@ -46,13 +37,6 @@ jobs:
         run: |
           bandit -rc .bandit.yml .
 
-      # Python application tests with pytest
-      - name: Python application tests with pytest
-        run: |
-          pwd
-          export PYTHONPATH=$PYTHONPATH:${{ env.PYTHONPATH }}
-          pytest tests/
-
       # Lint markdown files
       # markdownlint-cli action documentation
       # https://github.com/marketplace/actions/markdownlint-cli
@@ -61,3 +45,31 @@ jobs:
         with:
           files: .
           config_file: .markdownlint.json
+
+jobs:
+  testing:
+    name: Test repository files
+    runs-on: ubuntu-latest
+
+    env:
+      PYTHONPATH: ./
+
+    steps:
+      # Checkout repository code
+      # checkout@v2 action documentation
+      # https://github.com/marketplace/actions/checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Install testing packages
+      - name: Install test packages
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements/requirements.txt
+
+      # Python tests with pytest
+      - name: Python application tests with pytest
+        run: |
+          pwd
+          export PYTHONPATH=$PYTHONPATH:${{ env.PYTHONPATH }}
+          pytest tests/
