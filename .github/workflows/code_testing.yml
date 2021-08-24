@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PYTHONPATH: PYTHONPATH=/workspaces/namedtuple-maker:/~.
+      PYTHONPATH: /~.
 
     steps:
       # Checkout repository code
@@ -49,10 +49,8 @@ jobs:
       # Python application tests with pytest
       - name: Python application tests with pytest
         run: |
-          echo $PYTHONPATH
-          export $PYTHONPATH:${{ env.PYTHONPATH }}
-          echo $PYTHONPATH
-          echo pwd
+          pwd
+          export PYTHONPATH=$PYTHONPATH:${{ env.PYTHONPATH }}
           pytest tests/
 
       # Lint markdown files
