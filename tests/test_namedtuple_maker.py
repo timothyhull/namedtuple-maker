@@ -6,7 +6,7 @@
 '''
 
 # Imports
-from app.namedtuple_maker import named_tuple_converter, \
+from namedtuple_maker.namedtuple_maker import named_tuple_converter, \
                                   tuple_tester, TEST_DATA
 from collections import namedtuple
 from pytest import mark
