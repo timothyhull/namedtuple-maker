@@ -224,6 +224,7 @@ def run_tuple_tester() -> Callable:
         TEST_DATA as a test iterable.
     '''
 
+    print('\nThis is a sample run of namedtuple-generator.\n')
     return tuple_tester(
         iterable_input=tuple(TEST_DATA.values())
     )
