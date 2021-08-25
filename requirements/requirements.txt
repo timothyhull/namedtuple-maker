@@ -1,3 +1,7 @@
+# PyPI packaging
+bumpversion
+twine
+
 # Python development
 ipython
 
