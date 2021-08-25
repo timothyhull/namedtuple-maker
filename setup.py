@@ -9,15 +9,13 @@ from setuptools import find_packages, setup
 # Constants
 # The directory that contains this file
 HERE = pathlib.Path(__file__).parent
-# The root path of the repository
-ROOT = HERE.parent
 # README contents
-README = (ROOT / 'README.md').read_text()
+README = (HERE / 'README.md').read_text()
 
 # Setup
 setup(
     name='namedtuple-maker',
-    version='1.0.2',
+    version='1.0.3',
     description='Easily convert iterable objects into namedtuple objects.',
     long_description=README,
     long_description_content_type='text/markdown',
@@ -30,7 +28,10 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.9'
     ],
-    packages=find_packages(),
+    packages=find_packages(
+        include=(
+            'namedtuple_maker')
+        ),
     include_package_data=True,
     install_requires=None
 )
