@@ -33,7 +33,7 @@ setup(
     install_requires=None,
     entry_points={
         'console_scripts': [
-            'namedtuple_maker=namedtuple_maker.__main__:tuple_tester'
+            'namedtuple_maker=namedtuple_maker.__main__:run_tuple_tester'
         ]
     }
 )
