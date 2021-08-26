@@ -124,4 +124,3 @@ Readability counts.
 ## Simplifying the Complex
 
 The syntax to create `namedtuple` objects can be somewhat cumbersome, when compared to creating a `tuple` or `list`, for example.
- 
