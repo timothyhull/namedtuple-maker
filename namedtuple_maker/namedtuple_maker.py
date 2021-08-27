@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-''' Convert an iterable object into a named tuple using a decorator.
+''' Convert an iterable object into a namedtuple using a decorator.
     Provide the namedtuple attribute names in a kwarg of the decorated
-    function or enter attribute names at prompts.
+    function, or enter attribute names at prompts.
 
     Usage:
-        from name_that_tuple import named_tuple_converter
+        from namedtuple_maker.namedtuple_maker import named_tuple_converter
 
         @named_tuple_converter
         def your_function() -> Iterable:
@@ -42,7 +42,7 @@ ATTRIBUTE_INPUT_SPACE_CHARACTERS = compile(
     VERBOSE
 )
 
-# Test attribute and value data for the run_tuple_tester() function
+# Test attribute and value data for the run_make_named_tuple() function
 TEST_DATA = {
     'first_name': 'Alex',
     'last_name': 'Smith',
@@ -114,17 +114,17 @@ def named_tuple_converter(function: Callable) -> Callable:
             Args:
                 kwargs:
                     iterable_input (Iterable):
-                        Optional, any iteraterable object class including,
+                        Optional, any iterable object class including,
                         list, tuple, dict_keys, dict_values, etc.
 
                     attribute_names (Iterable[str]):
-                        Optional kwarg, any iteraterable object class
+                        Optional kwarg, any iterable object class
                         including, list, tuple, dict_keys, dict_values, etc.
                         with str values.
 
                     auto_attribute_names (bool):
                         Optional kwarg, automatically name attributes
-                        without user input or use of the attribut_names
+                        without user input or use of the attribute_names
                         parameter. Default: False
 
             Returns: named_tuple (namedtuple):
@@ -157,7 +157,7 @@ def named_tuple_converter(function: Callable) -> Callable:
                         )
                     )
 
-        # Validate attribure names
+        # Validate attribute names
         attribute_names = validate_attribute_input(
             attribute_names=attribute_names
         )
@@ -189,12 +189,12 @@ def named_tuple_converter(function: Callable) -> Callable:
 
 
 @named_tuple_converter
-def tuple_tester(
+def make_named_tuple(
     iterable_input: Iterable,
     attribute_names: Iterable[str] = None,
     auto_attribute_names: bool = False
 ) -> tuple:
-    ''' Function to test the tuple_converter decorator function.
+    ''' Function to consume the tuple_converter decorator function.
 
         Args:
             iterable_input (Iterable):
@@ -206,7 +206,7 @@ def tuple_tester(
 
             auto_attribute_names (bool):
                     Optional kwarg, automatically name attributes
-                    without user input or use of the attribut_names
+                    without user input or use of the attribute_names
                     parameter. Default: False
 
         Returns:
@@ -219,12 +219,12 @@ def tuple_tester(
     return tuple_output
 
 
-def run_tuple_tester() -> Callable:
-    ''' Function to run the decorated tuple_tester function using
+def run_make_named_tuple() -> Callable:
+    ''' Function to run the decorated make_named_tuple function using
         TEST_DATA as a test iterable.
     '''
 
     print('\nThis is a sample run of namedtuple-generator.\n')
-    return tuple_tester(
+    return make_named_tuple(
         iterable_input=tuple(TEST_DATA.values())
     )
