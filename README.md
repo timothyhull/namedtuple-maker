@@ -22,7 +22,7 @@ pip install namedtuple-maker
 
 ### :star: Usage as a Decorator
 
-<details><summary>**Decorator Example**</summary>
+<details><summary><b>Decorator Example</b></summary>
 
 1. Create an iterable object:
 
@@ -83,7 +83,7 @@ def tuple_to_namedtuple(
 
 ### :computer: Usage as a Function
 
-<details><summary>**Function Example**</summary>
+<details><summary><b>Function Example</b</summary>
 
 1. Create an iterable object:
 
