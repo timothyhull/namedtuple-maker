@@ -5,6 +5,7 @@
 ## :snake: Easily Convert Python iterable objects to `namedtuple` objects
 
 :white_check_mark: Convert an iterable object into a `namedtuple` object using a decorator function.
+
 :white_check_mark: Provide the `namedtuple` attribute names in a `kwarg` of the decorated function, or enter attribute names at prompts.
 
 ### :computer: Installation
