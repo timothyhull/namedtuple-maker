@@ -4,6 +4,53 @@
 
 ## :snake: Easily Convert Python iterable objects to `namedtuple` objects
 
+### :notebook: Contents
+
+- Overview
+- The Zen of Python
+- Requirements
+- Installation
+- Usage
+- Examples
+
+### :bulb: Overview
+
+Python `tuple` objects are great, right?  So are `list`, `set`, and many other iterable Python objects. However, accessing the values of an iterable by an arbitrary index number makes my code hard to read.  For example, the following `list` object stores data about foods I might eat in a given day:
+
+```python
+my_meals = [
+    'pizza',
+    'blueberry pancakes',
+    'granola',
+    'fruit smoothie',
+    'rice and beans'
+]
+```
+
+Let's say that I want to access the values in the `my_food` list within my code. I might do that with **list indexing** like this:
+
+```python
+print('My Meals')
+print('--------')
+print(f'Breakfast: {my_meals[1]}\n'
+      f'Snack: {my_meals[3]}\n'
+      f'Lunch: {my_meals[4]}')
+```
+
+The result from this code would be:
+
+```text
+My Meals
+--------
+Breakfast: blueberry pancakes
+Snack: fruit smoothie
+Lunch: rice and beans
+```
+
+That works just fine, although it's not terribly intuitive to associate a `list` (or `tuple`) index with a certain meal of the day since this particular list doesn't have the my meals in any particular order. The list index assigned to each meal is arbitrary.
+
+---
+
 :white_check_mark: Convert an iterable object into a `namedtuple` object using a decorator function.
 
 :white_check_mark: Provide the `namedtuple` attribute names in a `kwarg` of the decorated function, or enter attribute names at prompts.
@@ -42,14 +89,14 @@ pip install namedtuple-maker
 
 3. Create a function that returns an iterable object, and decorate that function with the `convert_to_namedtuple` decorator function:
 
-```python
-@named_tuple_converter
-def tuple_to_namedtuple(
-    iterable_input=my_favorites
-):
-
-    return iterable_input
-```
+    ```python
+    @named_tuple_converter
+    def tuple_to_namedtuple(
+        iterable_input=my_favorites
+    ):
+    
+        return iterable_input
+    ```
 
 4. Call the `tuple_to_namedtuple` function:
     - By default, you will receive a prompt to provide an attribute name for each iterable value.
