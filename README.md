@@ -2,9 +2,9 @@
 
 ![GitHub Actions Status](https://img.shields.io/github/workflow/status/wwt/devasc-data-formats/Markdown%20Linting?logo=github "GitHub Actions Status")
 
-## :snake: Easily Convert Python iterable objects to `namedtuple` objects
+## Easily Convert Python iterable objects to `namedtuple` objects
 
-### :scroll: Contents
+### Contents
 
 - [Capabilities](#mega-capabilities "Capabilities")
 - [Requirements](#warning-requirements "Requirements")
@@ -15,21 +15,23 @@
 
 ---
 
-### :mega: Capabilities
+### Capabilities
 
-:white_check_mark: Convert a Python iterable object into a `namedtuple` object using a decorator function.
+Convert a Python iterable object into a `namedtuple` object using a decorator function.
 
-:white_check_mark: Provide the `namedtuple` attribute names in a `kwarg` of the decorated function, or enter attribute names at prompts.
+Provide the `namedtuple` attribute names in a `kwarg` of the decorated function, or enter attribute names at prompts.
+
+Automatically corrects attribute name entries that would be invalid.
 
 ---
 
-### :warning: Requirements
+### Requirements
 
 - Python 3.9+
 
 ---
 
-### :computer: Installation
+### Installation
 
 Install via Python pip
 
@@ -39,9 +41,9 @@ pip install namedtuple-maker
 
 ---
 
-### :rocket: Usage
+### Usage
 
-#### :star: Usage as a Decorator
+#### Usage as a Decorator
 
 <details><summary><b>Click to expand and view a decorator example</b></summary>
 
@@ -127,7 +129,7 @@ pip install namedtuple-maker
 
 ---
 
-#### :computer: Usage as a Function
+#### Usage as a Function
 
 <details><summary><b>Click to expand and view a function usage example</b></summary>
 
@@ -155,10 +157,10 @@ pip install namedtuple-maker
     <details><summary>Option #1 - Enter attribute names using prompts:</summary>
 
     ```python
-        # Call the make_named_tuple function and fill the attribute name prompts
-        my_named_favorites = make_named_tuple(
-            iterable_input=my_favorites
-        )
+    # Call the make_named_tuple function and fill the attribute name prompts
+    my_named_favorites = make_named_tuple(
+        iterable_input=my_favorites
+    )
     ```
 
     ```text
@@ -204,7 +206,7 @@ pip install namedtuple-maker
 
 ---
 
-### :bulb: Background
+### Background
 
 Python `tuple` objects are great, right?  So are `list`, `set`, and many other iterable Python objects. However, accessing the values of an iterable by an arbitrary index number can make code difficult to read.  For example, the following `list` object stores data about the foods I might eat in a given day:
 
@@ -242,7 +244,7 @@ That works just fine, although it's not terribly intuitive to associate a `list`
 
 ---
 
-### :books: The Python `namedtuple` Function
+### The Python `namedtuple` Function
 
 The `collections` module in the Python Standard Library includes the [`namedtuple` function](https://docs.python.org/3/library/collections.html#collections.namedtuple), which allows you to, as the name implies, create tuple-like objects with values that you can reference by name.  What does that mean, practically? Well, it means you can access then values in an iterable object by an **attribute name** that is much more meaningful than an arbitrary index number.
 
@@ -308,7 +310,7 @@ The key difference between the `list` example and the `namedtuple` example is, a
 
 ---
 
-### :bamboo: `namedtuple` objects and The Zen of Python
+### `namedtuple` objects and The Zen of Python
 
 The [Zen of Python](https://www.python.org/dev/peps/pep-0020/ "Zen of Python") is a great guide for how to write clean and effective Python code. Below is an extract of some of the lines in the output of an `import this` command.  The intent of this package is to help Python developers write code that improves compliance with The Zen of Python by making it simple and easy to access iterable object values by _explicit_ attribute names, rather than _arbitrary_ numbers.
 
