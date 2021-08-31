@@ -15,8 +15,8 @@ README = (HERE / 'README.md').read_text()
 # Setup
 setup(
     name='namedtuple-maker',
-    version='1.0.4',
-    description='Easily convert iterable objects into namedtuple objects.',
+    version='1.0.5',
+    description='Easily convert iterable objects into `namedtuple` objects.',
     long_description=README,
     long_description_content_type='text/markdown',
     url='https://github.com/timothyhull/namedtuple-maker',
@@ -29,7 +29,7 @@ setup(
         'Programming Language :: Python :: 3.9'
     ],
     packages=find_packages(
-        exclude=(
+        include=(
             ['requirements', 'text'])
         ),
     include_package_data=True,
