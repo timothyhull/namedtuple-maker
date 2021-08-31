@@ -157,10 +157,10 @@ pip install namedtuple-maker
     <details><summary>Option #1 - Enter attribute names using prompts:</summary>
 
     ```python
-        # Call the make_named_tuple function and fill the attribute name prompts
-        my_named_favorites = make_named_tuple(
-            iterable_input=my_favorites
-        )
+    # Call the make_named_tuple function and fill the attribute name prompts
+    my_named_favorites = make_named_tuple(
+        iterable_input=my_favorites
+    )
     ```
 
     ```text
