@@ -46,7 +46,7 @@ jobs:
       # Lint markdown files
       # markdownlint-cli action documentation
       # https://github.com/marketplace/actions/markdownlint-cli
-      - name: markdownlint-cli
+      - name: Lint Markdown files with markdownlint-cli
         uses: nosborn/github-action-markdown-cli@v1.1.1
         with:
           files: .
