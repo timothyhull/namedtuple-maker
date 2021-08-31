@@ -4,18 +4,18 @@
 
 ## :snake: Easily Convert Python iterable objects to `namedtuple` objects
 
-### :notebook: Contents
+### :scroll: Contents
 
-- [Capabilities](#something-capabilities "Capabilities")
+- [Capabilities](#mega-capabilities "Capabilities")
 - [Requirements](#warning-requirements "Requirements")
-- [Installation](#star-installation "Installation")
+- [Installation](#computer-installation "Installation")
 - [Usage](#rocket-usage "Usage")
 - [Background](#bulb-background "Background")
 - [`namedtuple` objects and The Zen of Python](#bamboo-namedtuple-objects-and-the-zen-of-python "The Zen of Python")
 
 ---
 
-### :something: Capabilities
+### :mega: Capabilities
 
 :white_check_mark: Convert a Python iterable object into a `namedtuple` object using a decorator function.
 
@@ -26,6 +26,8 @@
 ### :warning: Requirements
 
 - Python 3.9+
+
+---
 
 ### :computer: Installation
 
@@ -122,6 +124,8 @@ pip install namedtuple-maker
     ```
 
 </details>
+
+---
 
 #### :computer: Usage as a Function
 
