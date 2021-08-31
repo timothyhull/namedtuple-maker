@@ -68,7 +68,7 @@ pip install namedtuple-maker
     def tuple_to_namedtuple(
         iterable_input=my_favorites
     ):
-    
+
         return iterable_input
     ```
 
