@@ -104,7 +104,7 @@ pip install namedtuple-maker
     )
 
     # Call the make_named_tuple function and pass in the attribute names
-    my_named_favorites = make_named_tuple(
+    my_named_favorites = tuple_to_namedtuple(
         attribute_names=my_attributes
     )
     ```
