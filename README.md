@@ -117,7 +117,7 @@ pip install namedtuple-maker
     print(my_named_favorites)
     ```
 
-6. Review the `print` function output:
+6. Observe the `print` function output:
 
     ```text
     NamedTuple(food='pizza', season='summer', sports_team='too personal')
@@ -148,8 +148,8 @@ pip install namedtuple-maker
     ```
 
 3. Call the `make_named_tuple` function:
-    - Pass an iterable object (`my_favorites`, in this example) to the `iterable_input` parameter.
-    - By default, you will receive a prompt to provide an attribute name for each iterable value.
+    - Pass an iterable object (the default `my_favorites` object, in this example) to the `iterable_input` parameter.
+    - By default, you will receive a prompt to provide an attribute name for each iterable input value.
     - You may instead pass a separate iterable object of attribute names to the `attribute_names` parameter.
 
     <details><summary>Option #1 - Enter attribute names using prompts:</summary>
@@ -194,7 +194,7 @@ pip install namedtuple-maker
     print(my_named_favorites)
     ```
 
-5. Observe `print` function output:
+5. Observe the `print` function output:
 
     ```text
     NamedTuple(food='pizza', season='summer', sports_team='too personal')
