@@ -21,6 +21,8 @@
 
 :white_check_mark: Provide the `namedtuple` attribute names in a `kwarg` of the decorated function, or enter attribute names at prompts.
 
+:white_check_mark: Automatically corrects attribute name entries that would be invalid.
+
 ---
 
 ### :warning: Requirements
