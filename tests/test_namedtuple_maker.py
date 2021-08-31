@@ -6,8 +6,8 @@
 '''
 
 # Imports
-from app.namedtuple_maker import named_tuple_converter, \
-                                  tuple_tester, TEST_DATA
+from namedtuple_maker.namedtuple_maker import named_tuple_converter, \
+                                  make_named_tuple, TEST_DATA
 from collections import namedtuple
 from pytest import mark
 from typing import Iterable
@@ -70,7 +70,7 @@ def test_named_tuple_converter(
     '''
 
     # Get a result to test
-    test_result = tuple_tester(
+    test_result = make_named_tuple(
         iterable_input=iter_input,
         attribute_names=att_names
     )
@@ -103,7 +103,7 @@ def test_named_tuple_converter_input(side_effects) -> None:
     '''
 
     # Get a result to test
-    test_result = tuple_tester(
+    test_result = make_named_tuple(
         iterable_input=TEST_DATA.values(),
     )
 

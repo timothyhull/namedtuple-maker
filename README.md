@@ -1,5 +1,325 @@
 # `namedtuple` Maker
 
-## Overview
+![GitHub Actions Status](https://img.shields.io/github/workflow/status/wwt/devasc-data-formats/Markdown%20Linting?logo=github "GitHub Actions Status")
+
+## :snake: Easily Convert Python iterable objects to `namedtuple` objects
+
+### :scroll: Contents
+
+- [Capabilities](#mega-capabilities "Capabilities")
+- [Requirements](#warning-requirements "Requirements")
+- [Installation](#computer-installation "Installation")
+- [Usage](#rocket-usage "Usage")
+- [Background](#bulb-background "Background")
+- [`namedtuple` objects and The Zen of Python](#bamboo-namedtuple-objects-and-the-zen-of-python "The Zen of Python")
 
 ---
+
+### :mega: Capabilities
+
+:white_check_mark: Convert a Python iterable object into a `namedtuple` object using a decorator function.
+
+:white_check_mark: Provide the `namedtuple` attribute names in a `kwarg` of the decorated function, or enter attribute names at prompts.
+
+---
+
+### :warning: Requirements
+
+- Python 3.9+
+
+---
+
+### :computer: Installation
+
+Install via Python pip
+
+```bash
+pip install namedtuple-maker
+```
+
+---
+
+### :rocket: Usage
+
+#### :star: Usage as a Decorator
+
+<details><summary><b>Click to expand and view a decorator example</b></summary>
+
+1. Create an iterable object:
+
+    ```python
+    my_favorites = (
+        'pizza',
+        'summer',
+        'too personal'
+    )
+    ```
+
+2. Import the `convert_to_namedtuple` decorator function:
+
+    ```python
+    from namedtuple_maker.namedtuple_maker import named_tuple_converter
+    ```
+
+3. Create a function that returns an iterable object, and decorate that function with the `convert_to_namedtuple` decorator function:
+
+    ```python
+    @named_tuple_converter
+    def tuple_to_namedtuple(
+        iterable_input=my_favorites,
+        attribute_names=None
+    ):
+
+        return iterable_input
+    ```
+
+4. Call the `tuple_to_namedtuple` function:
+    - Pass an iterable object (the default `my_favorites` object, in this example) to the `iterable_input` parameter.
+    - By default, you will receive a prompt to provide an attribute name for each iterable input value.
+    - You may instead pass a separate iterable object of attribute names to the `attribute_names` parameter.
+
+    <details><summary>Option #1 - Enter attribute names using prompts:</summary>
+
+    ```python
+    # Call the tuple_to_namedtuple function and fill the attribute name prompts
+    my_named_favorites = tuple_to_namedtuple()
+    ```
+
+    ```text
+    Enter an attribute name for the value "pizza": food
+    Enter an attribute name for the value "summer": season
+    Enter an attribute name for the value "too personal": sports team
+    ```
+
+    </details>
+
+    <details><summary>Option #2 - Pass an iterable object of attribute names to the `attribute_names` parameter:</summary>
+
+    ```python
+    # Create an iterable object with attribute names
+    my_attributes = (
+        'food',
+        'season',
+        'sports team'
+    )
+
+    # Call the make_named_tuple function and pass in the attribute names
+    my_named_favorites = tuple_to_namedtuple(
+        attribute_names=my_attributes
+    )
+    ```
+
+    </details>
+
+5. Display the resulting `namedtuple` object:
+
+    ```python
+    print(my_named_favorites)
+    ```
+
+6. Observe the `print` function output:
+
+    ```text
+    NamedTuple(food='pizza', season='summer', sports_team='too personal')
+    ```
+
+</details>
+
+---
+
+#### :computer: Usage as a Function
+
+<details><summary><b>Click to expand and view a function usage example</b></summary>
+
+1. Create an iterable object:
+
+    ```python
+    my_favorites = (
+        'pizza',
+        'summer',
+        'too personal'
+    )
+    ```
+
+2. Import the `make_named_tuple` function:
+
+    ```python
+    from namedtuple_maker.namedtuple_maker import make_named_tuple
+    ```
+
+3. Call the `make_named_tuple` function:
+    - Pass an iterable object (the default `my_favorites` object, in this example) to the `iterable_input` parameter.
+    - By default, you will receive a prompt to provide an attribute name for each iterable input value.
+    - You may instead pass a separate iterable object of attribute names to the `attribute_names` parameter.
+
+    <details><summary>Option #1 - Enter attribute names using prompts:</summary>
+
+    ```python
+        # Call the make_named_tuple function and fill the attribute name prompts
+        my_named_favorites = make_named_tuple(
+            iterable_input=my_favorites
+        )
+    ```
+
+    ```text
+    Enter an attribute name for the value "pizza": food
+    Enter an attribute name for the value "summer": season
+    Enter an attribute name for the value "too personal": sports team
+    ```
+
+    </details>
+
+    <details><summary>Option #2 - Pass an iterable object of attribute names to the `attribute_names` parameter:</summary>
+
+    ```python
+    # Create an iterable object with attribute names
+    my_attributes = (
+        'food',
+        'season',
+        'sports team'
+    )
+
+    # Call the make_named_tuple function and pass in the attribute names
+    my_named_favorites = make_named_tuple(
+        iterable_input=my_favorites,
+        attribute_names=my_attributes
+    )
+    ```
+
+    </details>
+
+4. Display the resulting `namedtuple` object:
+
+    ```python
+    print(my_named_favorites)
+    ```
+
+5. Observe the `print` function output:
+
+    ```text
+    NamedTuple(food='pizza', season='summer', sports_team='too personal')
+    ```
+
+</details>
+
+---
+
+### :bulb: Background
+
+Python `tuple` objects are great, right?  So are `list`, `set`, and many other iterable Python objects. However, accessing the values of an iterable by an arbitrary index number can make code difficult to read.  For example, the following `list` object stores data about the foods I might eat in a given day:
+
+```python
+my_meals = [
+    'pizza',
+    'blueberry pancakes',
+    'granola',
+    'fruit smoothie',
+    'rice and beans'
+]
+```
+
+Let's say that I want to access values in the `my_food` `list` object. I can do that by referencing one or more numeric **list indices** like this:
+
+```python
+print('My Meals')
+print('--------')
+print(f'Breakfast: {my_meals[1]}\n'
+      f'Snack: {my_meals[3]}\n'
+      f'Lunch: {my_meals[4]}')
+```
+
+The resulting output from this code would be:
+
+```text
+My Meals
+--------
+Breakfast: blueberry pancakes
+Snack: fruit smoothie
+Lunch: rice and beans
+```
+
+That works just fine, although it's not terribly intuitive to associate a `list` (or `tuple`) index with a certain meal of the day, since this particular `list` doesn't have the meals in any particular order. The list index assigned to each meal is arbitrary.
+
+---
+
+### :books: The Python `namedtuple` Function
+
+The `collections` module in the Python Standard Library includes the [`namedtuple` function](https://docs.python.org/3/library/collections.html#collections.namedtuple), which allows you to, as the name implies, create tuple-like objects with values that you can reference by name.  What does that mean, practically? Well, it means you can access then values in an iterable object by an **attribute name** that is much more meaningful than an arbitrary index number.
+
+For example, I'll recreate the `my_meals` data using a `namedtuple` object:
+
+1. First, import the `namedtuple` function from the `collections` module:
+
+    ```python
+    from collections import namedtuple
+    ```
+
+2. Next, create a new object type using the `namedtuple` function.
+    - Think of a `namedtuple` object like a `class` object with named attributes but no methods.
+    - The `typename` parameter is an arbitrary name for the object class.
+    - The `field_names` parameter defines the attribute names for the new object.
+
+    ```python
+    Meals = namedtuple(
+        typename='Meals',
+        field_names=[
+            'breakfast',
+            'snack',
+            'lunch',
+            'dinner',
+            'dessert'
+        ]
+    )
+    ```
+
+3. Now, create an instance of the `Meals` object, and assign the individual foods to each of the named attributes (specified by the `field_names` parameter):
+
+    ```python
+    my_meals = Meals(
+        breakfast='blueberry pancakes',
+        snack='fruit smoothie',
+        lunch='rice and beans',
+        dinner='pizza',
+        dessert='granola'
+    )
+    ```
+
+When I want to access or display data from the `my_meals` `namedtuple` object, my code will look something like this:
+
+```python
+print('My Meals')
+print('--------')
+print(f'Breakfast: {my_meals.breakfast}\n'
+      f'Snack: {my_meals.snack}\n'
+      f'Lunch: {my_meals.lunch}')
+```
+
+The result from this code looks exactly like it did in the first example:
+
+```text
+My Meals
+--------
+Breakfast: blueberry pancakes
+Snack: fruit smoothie
+Lunch: rice and beans
+```
+
+The key difference between the `list` example and the `namedtuple` example is, accessing the values in the `namedtuple` object uses **named attributes**, rather than arbitrary index numbers. For me, it's much easier to remember that the food I ate for breakfast is accessible as `my_foods.breakfast` within in a `namedtuple` object, than it is to remember an arbitrary `list` index value like `my_foods[3]`.
+
+---
+
+### :bamboo: `namedtuple` objects and The Zen of Python
+
+The [Zen of Python](https://www.python.org/dev/peps/pep-0020/ "Zen of Python") is a great guide for how to write clean and effective Python code. Below is an extract of some of the lines in the output of an `import this` command.  The intent of this package is to help Python developers write code that improves compliance with The Zen of Python by making it simple and easy to access iterable object values by _explicit_ attribute names, rather than _arbitrary_ numbers.
+
+```text
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+...
+Readability counts.
+...
+```
