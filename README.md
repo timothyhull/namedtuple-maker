@@ -66,15 +66,16 @@ pip install namedtuple-maker
     ```python
     @named_tuple_converter
     def tuple_to_namedtuple(
-        iterable_input=my_favorites
+        iterable_input=my_favorites,
+        attribute_names=None
     ):
 
         return iterable_input
     ```
 
 4. Call the `tuple_to_namedtuple` function:
-    - Pass an iterable object (`my_favorites`, in this example) to the `iterable_input` parameter.
-    - By default, you will receive a prompt to provide an attribute name for each iterable value.
+    - Pass an iterable object (the default `my_favorites` object, in this example) to the `iterable_input` parameter.
+    - By default, you will receive a prompt to provide an attribute name for each iterable input value.
     - You may instead pass a separate iterable object of attribute names to the `attribute_names` parameter.
 
     <details><summary>Option #1 - Enter attribute names using prompts:</summary>
@@ -104,7 +105,6 @@ pip install namedtuple-maker
 
     # Call the make_named_tuple function and pass in the attribute names
     my_named_favorites = make_named_tuple(
-        iterable_input=my_favorites,
         attribute_names=my_attributes
     )
     ```
@@ -316,8 +316,10 @@ The [Zen of Python](https://www.python.org/dev/peps/pep-0020/ "Zen of Python") i
 The Zen of Python, by Tim Peters
 
 Beautiful is better than ugly.
-Readability counts.
 Explicit is better than implicit.
 Simple is better than complex.
 Complex is better than complicated.
+...
+Readability counts.
+...
 ```
