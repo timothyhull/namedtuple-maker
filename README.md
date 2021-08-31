@@ -71,16 +71,15 @@ pip install namedtuple-maker
     ```
 
 4. Call the `tuple_to_namedtuple` function:
+    - Pass an iterable object (`my_favorites`, in this example) to the `iterable_input` parameter.
     - By default, you will receive a prompt to provide an attribute name for each iterable value.
-    - You may instead pass an iterable in the `attribute_names` parameter, to use as attribute names.
+    - You may instead pass a separate iterable object of attribute names to the `attribute_names` parameter.
 
-    <details><summary>Option #1 - Enter attribute names as prompts:</summary>
+    <details><summary>Option #1 - Enter attribute names using prompts:</summary>
 
     ```python
-    # Call the make_named_tuple function and fill the attribute name prompts
-    my_named_favorites = make_named_tuple(
-        iterable_input=my_favorites
-    )
+    # Call the tuple_to_namedtuple function and fill the attribute name prompts
+    my_named_favorites = tuple_to_namedtuple()
     ```
 
     ```text
@@ -91,7 +90,7 @@ pip install namedtuple-maker
 
     </details>
 
-    <details><summary>Option #2 - Pass attribute names as an iterable in the `attribute_names` parameter:</summary>
+    <details><summary>Option #2 - Pass an iterable object of attribute names to the `attribute_names` parameter:</summary>
 
     ```python
     # Create an iterable object with attribute names
@@ -126,7 +125,7 @@ pip install namedtuple-maker
 
 #### :computer: Usage as a Function
 
-<details><summary><b>Click to expand and view a function example</b></summary>
+<details><summary><b>Click to expand and view a function usage example</b></summary>
 
 1. Create an iterable object:
 
@@ -144,19 +143,15 @@ pip install namedtuple-maker
     from namedtuple_maker.namedtuple_maker import make_named_tuple
     ```
 
-3. Supply the `make_named_tuple` function an argument with an iterable.
-
-    ```python
-    my_namedtuple = make_named_tuple(
-        iterable_input: my_favorites
-    )
-    ```
-
 3. Call the `make_named_tuple` function:
+    - Pass an iterable object (`my_favorites`, in this example) to the `iterable_input` parameter.
     - By default, you will receive a prompt to provide an attribute name for each iterable value.
-    - You may instead pass an iterable in the `attribute_names` parameter, to use as attribute names.
+    - You may instead pass a separate iterable object of attribute names to the `attribute_names` parameter.
+
+    <details><summary>Option #1 - Enter attribute names using prompts:</summary>
 
     ```python
+        # Call the make_named_tuple function and fill the attribute name prompts
         my_named_favorites = make_named_tuple(
             iterable_input=my_favorites
         )
@@ -167,6 +162,27 @@ pip install namedtuple-maker
     Enter an attribute name for the value "summer": season
     Enter an attribute name for the value "too personal": sports team
     ```
+
+    </details>
+
+    <details><summary>Option #2 - Pass an iterable object of attribute names to the `attribute_names` parameter:</summary>
+
+    ```python
+    # Create an iterable object with attribute names
+    my_attributes = (
+        'food',
+        'season',
+        'sports team'
+    )
+
+    # Call the make_named_tuple function and pass in the attribute names
+    my_named_favorites = make_named_tuple(
+        iterable_input=my_favorites,
+        attribute_names=my_attributes
+    )
+    ```
+
+    </details>
 
 4. Display the resulting `namedtuple` object:
 
