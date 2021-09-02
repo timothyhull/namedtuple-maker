@@ -93,4 +93,4 @@ jobs:
       - name: Install Python package with pip
         run: |
           pip install ${{ env.PACKAGE_NAME }}
-          env
+          python -c "import bleh"
