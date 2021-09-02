@@ -81,6 +81,9 @@ jobs:
   package-install:
     name: Test PyPI package installation
     runs-on: ubuntu-latest
+    needs:
+      - linting
+      - testing
 
     env:
       PACKAGE_NAME: namedtuple-maker
@@ -90,3 +93,4 @@ jobs:
       - name: Install Python package with pip
         run: |
           pip install ${{ env.PACKAGE_NAME }}
+          env
