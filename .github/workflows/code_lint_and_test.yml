@@ -86,16 +86,38 @@ jobs:
       - testing
 
     env:
-      MODULE_NAME: namedtuple_maker
-      PACKAGE_NAME: namedtuple-maker
+      DECORATOR: named_tuple_converter
+      MODULE: namedtuple_maker
+      PACKAGE: namedtuple-maker
+      TEST_SCRIPT: namedtuple_tester.py
 
     steps:
       # Install Python package with pip
       - name: Install Python package with pip
         run: |
-          pip install ${{ env.PACKAGE_NAME }}
+          pip install ${{ env.PACKAGE }}
 
       # Test package module import
       - name: Test package module import
         run: |
-          python -c "from ${{ env.MODULE_NAME }} import ${{ env.MODULE_NAME }}"
+          python -c "from ${{ env.MODULE }} import ${{ env.MODULE }}"
+
+      # Build test script
+      - name: Build test script
+        run: |
+          echo #!/usr/bin/env python3 > ${{ env.TEST_SCRIPT }}
+          echo from ${{ env.MODULE }}.${{ env.MODULE }} import \
+            ${{ env.PACKAGE }} >> ${{ env.TEST_SCRIPT }}
+          echo @${{ env.DECORATOR }} >> ${{ env.TEST_SCRIPT }}
+          echo def ${{ env.DECORATOR }}_test( >> ${{ env.TEST_SCRIPT }}
+          echo     iterable_input=TEST_DATA.values() >> ${{ env.TEST_SCRIPT }}
+          echo     attribute_names=TEST_DATA.keys() >> ${{ env.TEST_SCRIPT }}
+          echo ): >> ${{ env.TEST_SCRIPT }}
+          echo     return iterable_input >> ${{ env.TEST_SCRIPT }}
+          echo print(${{ env.DECORATOR }}_test()) >> ${{ env.TEST_SCRIPT }}
+          chmod + x ${{ env.TEST_SCRIPT }}
+
+      # Run test script
+      - name: Run test script
+        run: |
+          ./${{ env.TEST_SCRIPT }}
