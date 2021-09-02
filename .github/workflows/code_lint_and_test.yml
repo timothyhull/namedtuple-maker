@@ -105,19 +105,24 @@ jobs:
       # Build test script
       - name: Build test script
         run: |
-          echo #!/usr/bin/env python3 > ${{ env.TEST_SCRIPT }}
-          echo from ${{ env.MODULE }}.${{ env.MODULE }} import \
-            ${{ env.PACKAGE }} >> ${{ env.TEST_SCRIPT }}
-          echo @${{ env.DECORATOR }} >> ${{ env.TEST_SCRIPT }}
-          echo def ${{ env.DECORATOR }}_test( >> ${{ env.TEST_SCRIPT }}
-          echo     iterable_input=TEST_DATA.values() >> ${{ env.TEST_SCRIPT }}
-          echo     attribute_names=TEST_DATA.keys() >> ${{ env.TEST_SCRIPT }}
-          echo ): >> ${{ env.TEST_SCRIPT }}
-          echo     return iterable_input >> ${{ env.TEST_SCRIPT }}
-          echo print(${{ env.DECORATOR }}_test()) >> ${{ env.TEST_SCRIPT }}
-          chmod + x ${{ env.TEST_SCRIPT }}
+          echo "from ${{ env.MODULE }}.${{ env.MODULE }} import *" \
+            >> ${{ env.TEST_DECORATOR }}
+          echo
+          echo "@${{ env.DECORATOR }}" >> ${{ env.TEST_SCRIPT }}
+          echo "def ${{ env.DECORATOR }}_test(" >> ${{ env.TEST_SCRIPT }}
+          echo "  iterable_input=TEST_DATA.values()," >> ${{ env.TEST_SCRIPT }}
+          echo "  attribute_names=TEST_DATA.keys()" >> ${{ env.TEST_SCRIPT }}
+          echo "):" >> ${{ env.TEST_SCRIPT }}
+          echo   "return iterable_input" >> ${{ env.TEST_SCRIPT }}
+          echo
+          echo "print(" >> ${{ env.TEST_SCRIPT }}
+          echo "  ${{ env.DECORATOR }}_test(" >> ${{ env.TEST_SCRIPT }}
+          echo "    attribute_names=TEST_DATA.keys()" >> ${{ env.TEST_SCRIPT }}
+          echo "  )" >> ${{ env.TEST_SCRIPT }}
+          echo ")" >> ${{ env.TEST_SCRIPT }}
+          echo
 
       # Run test script
       - name: Run test script
         run: |
-          ./${{ env.TEST_SCRIPT }}
+          python3 ${{ env.TEST_SCRIPT }}
