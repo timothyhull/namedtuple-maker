@@ -75,6 +75,18 @@ jobs:
       # Python tests with pytest
       - name: Python application tests with pytest
         run: |
-          pwd
           export PYTHONPATH=$PYTHONPATH:${{ env.PYTHONPATH }}
           pytest tests/
+
+  package-install:
+    name: Test PyPI package installation
+    runs-on: ubuntu-latest
+
+    env:
+      PACKAGE_NAME: namedtuple-maker
+
+    steps:
+      # Install Python package with pip
+      - name: Install Python package with pip
+        run: |
+          pip install ${{ env.PACKAGE_NAME }}
