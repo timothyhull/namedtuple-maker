@@ -106,21 +106,21 @@ jobs:
       - name: Build test script
         run: |
           echo "from ${{ env.MODULE }}.${{ env.MODULE }} import *" \
-            >> ${{ env.TEST_DECORATOR }}
-          echo
+            >> ${{ env.TEST_SCRIPT }}
+          echo >> ${{ env.TEST_SCRIPT }}
           echo "@${{ env.DECORATOR }}" >> ${{ env.TEST_SCRIPT }}
           echo "def ${{ env.DECORATOR }}_test(" >> ${{ env.TEST_SCRIPT }}
           echo "  iterable_input=TEST_DATA.values()," >> ${{ env.TEST_SCRIPT }}
           echo "  attribute_names=TEST_DATA.keys()" >> ${{ env.TEST_SCRIPT }}
           echo "):" >> ${{ env.TEST_SCRIPT }}
-          echo   "return iterable_input" >> ${{ env.TEST_SCRIPT }}
-          echo
+          echo   "  return iterable_input" >> ${{ env.TEST_SCRIPT }}
+          echo >> ${{ env.TEST_SCRIPT }}
           echo "print(" >> ${{ env.TEST_SCRIPT }}
           echo "  ${{ env.DECORATOR }}_test(" >> ${{ env.TEST_SCRIPT }}
           echo "    attribute_names=TEST_DATA.keys()" >> ${{ env.TEST_SCRIPT }}
           echo "  )" >> ${{ env.TEST_SCRIPT }}
           echo ")" >> ${{ env.TEST_SCRIPT }}
-          echo
+          echo >> ${{ env.TEST_SCRIPT }}
 
       # Run test script
       - name: Run test script
