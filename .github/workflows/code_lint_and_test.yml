@@ -75,6 +75,54 @@ jobs:
       # Python tests with pytest
       - name: Python application tests with pytest
         run: |
-          pwd
           export PYTHONPATH=$PYTHONPATH:${{ env.PYTHONPATH }}
           pytest tests/
+
+  package-install:
+    name: Test PyPI package installation
+    runs-on: ubuntu-latest
+    needs:
+      - linting
+      - testing
+
+    env:
+      DECORATOR: named_tuple_converter
+      MODULE: namedtuple_maker
+      PACKAGE: namedtuple-maker
+      TEST_SCRIPT: namedtuple_tester.py
+
+    steps:
+      # Install Python package with pip
+      - name: Install Python package with pip
+        run: |
+          pip install ${{ env.PACKAGE }}
+
+      # Test package module import
+      - name: Test package module import
+        run: |
+          python -c "from ${{ env.MODULE }} import ${{ env.MODULE }}"
+
+      # Build test script
+      - name: Build test script
+        run: |
+          echo "from ${{ env.MODULE }}.${{ env.MODULE }} import *" \
+            >> ${{ env.TEST_SCRIPT }}
+          echo >> ${{ env.TEST_SCRIPT }}
+          echo "@${{ env.DECORATOR }}" >> ${{ env.TEST_SCRIPT }}
+          echo "def ${{ env.DECORATOR }}_test(" >> ${{ env.TEST_SCRIPT }}
+          echo "  iterable_input=TEST_DATA.values()," >> ${{ env.TEST_SCRIPT }}
+          echo "  attribute_names=TEST_DATA.keys()" >> ${{ env.TEST_SCRIPT }}
+          echo "):" >> ${{ env.TEST_SCRIPT }}
+          echo   "  return iterable_input" >> ${{ env.TEST_SCRIPT }}
+          echo >> ${{ env.TEST_SCRIPT }}
+          echo "print(" >> ${{ env.TEST_SCRIPT }}
+          echo "  ${{ env.DECORATOR }}_test(" >> ${{ env.TEST_SCRIPT }}
+          echo "    attribute_names=TEST_DATA.keys()" >> ${{ env.TEST_SCRIPT }}
+          echo "  )" >> ${{ env.TEST_SCRIPT }}
+          echo ")" >> ${{ env.TEST_SCRIPT }}
+          echo >> ${{ env.TEST_SCRIPT }}
+
+      # Run test script
+      - name: Run test script
+        run: |
+          python3 ${{ env.TEST_SCRIPT }}
