@@ -2,26 +2,26 @@
 
 ![GitHub Actions Status](https://img.shields.io/github/workflow/status/wwt/devasc-data-formats/Markdown%20Linting?logo=github "GitHub Actions Status")
 
-## Easily Convert Python iterable objects to `namedtuple` objects
+## Easily Convert Python iterable objects into `namedtuple` objects
 
 ### Contents
 
-- [Capabilities](#mega-capabilities "Capabilities")
-- [Requirements](#warning-requirements "Requirements")
-- [Installation](#computer-installation "Installation")
-- [Usage](#rocket-usage "Usage")
-- [Background](#bulb-background "Background")
-- [`namedtuple` objects and The Zen of Python](#bamboo-namedtuple-objects-and-the-zen-of-python "The Zen of Python")
+- [Capabilities](#capabilities "Capabilities")
+- [Requirements](#requirements "Requirements")
+- [Installation](#installation "Installation")
+- [Usage](#usage "Usage")
+- [Background](#background "Background")
+- [`namedtuple` objects and The Zen of Python](#namedtuple-objects-and-the-zen-of-python "The Zen of Python")
 
 ---
 
 ### Capabilities
 
-Convert a Python iterable object into a `namedtuple` object using a decorator function.
+- Converts Python iterable objects (`list`, `tuple`, `set`, etc.) into a `namedtuple` objects using a decorator function, **so you don't have to rewrite code that already returns iterable objects**.
 
-Provide the `namedtuple` attribute names in a `kwarg` of the decorated function, or enter attribute names at prompts.
+- Gathers `namedtuple` attribute names via either a `kwarg` in a decorated function or using prompts to collect attribute names.
 
-Automatically corrects attribute name entries that would be invalid.
+- Automatically corrects attribute name entries that would be invalid.
 
 ---
 
@@ -33,7 +33,7 @@ Automatically corrects attribute name entries that would be invalid.
 
 ### Installation
 
-Install via Python pip
+Install via Python pip:
 
 ```bash
 pip install namedtuple-maker
@@ -208,7 +208,7 @@ pip install namedtuple-maker
 
 ### Background
 
-Python `tuple` objects are great, right?  So are `list`, `set`, and many other iterable Python objects. However, accessing the values of an iterable by an arbitrary index number can make code difficult to read.  For example, the following `list` object stores data about the foods I might eat in a given day:
+Python `tuple` objects are great, right?  So are `list`, `set`, and many other iterable Python objects. However, accessing the values of an iterable object using arbitrary index numbers can make code difficult to read.  For example, the following `list` object stores data about the foods I might eat in a given day:
 
 ```python
 my_meals = [
@@ -220,7 +220,7 @@ my_meals = [
 ]
 ```
 
-Let's say that I want to access values in the `my_food` `list` object. I can do that by referencing one or more numeric **list indices** like this:
+Let's say that I want to access values in the `list` object named `my_food`. I can do that by referencing one or more numeric **list indices** like this:
 
 ```python
 print('My Meals')
@@ -230,7 +230,7 @@ print(f'Breakfast: {my_meals[1]}\n'
       f'Lunch: {my_meals[4]}')
 ```
 
-The resulting output from this code would be:
+The resulting output from this code is:
 
 ```text
 My Meals
@@ -240,13 +240,13 @@ Snack: fruit smoothie
 Lunch: rice and beans
 ```
 
-That works just fine, although it's not terribly intuitive to associate a `list` (or `tuple`) index with a certain meal of the day, since this particular `list` doesn't have the meals in any particular order. The list index assigned to each meal is arbitrary.
+That works just fine, although it's not terribly intuitive to associate a `list` (or `tuple`) **index number** with a certain meal of the day, since this `list` doesn't have meals in any particular order. The list index assigned to each meal is _arbitrary_.
 
 ---
 
 ### The Python `namedtuple` Function
 
-The `collections` module in the Python Standard Library includes the [`namedtuple` function](https://docs.python.org/3/library/collections.html#collections.namedtuple), which allows you to, as the name implies, create tuple-like objects with values that you can reference by name.  What does that mean, practically? Well, it means you can access then values in an iterable object by an **attribute name** that is much more meaningful than an arbitrary index number.
+The `collections` module in the Python Standard Library includes the [`namedtuple` function](https://docs.python.org/3/library/collections.html#collections.namedtuple), which allows you to, as the name implies, create tuple-like objects with values that you can reference by name.  What does that mean, practically? Well, it means you can access the values in an iterable object by an _explicit_ **attribute name** that is much more meaningful than an _arbitrary_ **index number**.
 
 For example, I'll recreate the `my_meals` data using a `namedtuple` object:
 
@@ -257,7 +257,7 @@ For example, I'll recreate the `my_meals` data using a `namedtuple` object:
     ```
 
 2. Next, create a new object type using the `namedtuple` function.
-    - Think of a `namedtuple` object like a `class` object with named attributes but no methods.
+    - Think of a `namedtuple` object like a `class` object with named attributes, but no methods.
     - The `typename` parameter is an arbitrary name for the object class.
     - The `field_names` parameter defines the attribute names for the new object.
 
@@ -286,7 +286,7 @@ For example, I'll recreate the `my_meals` data using a `namedtuple` object:
     )
     ```
 
-When I want to access or display data from the `my_meals` `namedtuple` object, my code will look something like this:
+When I want to access or display data from the `namedtuple` object named `my_meals`, my code will look something like this:
 
 ```python
 print('My Meals')
@@ -306,13 +306,17 @@ Snack: fruit smoothie
 Lunch: rice and beans
 ```
 
-The key difference between the `list` example and the `namedtuple` example is, accessing the values in the `namedtuple` object uses **named attributes**, rather than arbitrary index numbers. For me, it's much easier to remember that the food I ate for breakfast is accessible as `my_foods.breakfast` within in a `namedtuple` object, than it is to remember an arbitrary `list` index value like `my_foods[3]`.
+The key difference between the `list` example and the `namedtuple` example is, accessing the values in the `namedtuple` object uses _explicit_ **named attributes** (`my_meals.lunch`), rather than _arbitrary_ **index numbers** (`my_meals[4]`).
+
+For me, it's much easier to remember that the food I ate for breakfast is accessible as `my_foods.breakfast` within a `namedtuple` object, than it is to remember an arbitrary `list` index value like `my_foods[3]`.
 
 ---
 
 ### `namedtuple` objects and The Zen of Python
 
-The [Zen of Python](https://www.python.org/dev/peps/pep-0020/ "Zen of Python") is a great guide for how to write clean and effective Python code. Below is an extract of some of the lines in the output of an `import this` command.  The intent of this package is to help Python developers write code that improves compliance with The Zen of Python by making it simple and easy to access iterable object values by _explicit_ attribute names, rather than _arbitrary_ numbers.
+The [Zen of Python](https://www.python.org/dev/peps/pep-0020/ "Zen of Python") is a great guide for how to write clean and effective Python code. Below is an extract of some of the lines in the output of an `import this` command.
+
+The intent of the `named-tuplemaker` package is to help Python developers write code that improves compliance with The Zen of Python by making it simple and easy to access iterable object values by _explicit_ **attribute names**, rather than _arbitrary_ **index numbers**.
 
 ```text
 The Zen of Python, by Tim Peters
