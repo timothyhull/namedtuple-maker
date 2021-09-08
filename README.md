@@ -19,7 +19,7 @@
 
 - [X] Converts a Python iterable object (`list`, `tuple`, `set`, etc.) into a `namedtuple` object using a decorator function.
 
-- [X] Gathers `namedtuple` attribute names via a either a `kwarg` in a decorated function or using  prompts to collect attribute names.
+- [X] Gathers `namedtuple` attribute names via either a `kwarg` in a decorated function or using prompts to collect attribute names.
 
 - [X] Automatically corrects attribute name entries that would be invalid.
 
@@ -33,7 +33,7 @@
 
 ### Installation
 
-Install via Python pip
+Install via Python pip:
 
 ```bash
 pip install namedtuple-maker
