@@ -15,7 +15,7 @@ README = (HERE / 'README.md').read_text()
 # Setup
 setup(
     name='namedtuple-maker',
-    version='1.0.8',
+    version='1.0.9',
     description='Easily convert iterable objects into `namedtuple` objects.',
     long_description=README,
     long_description_content_type='text/markdown',
