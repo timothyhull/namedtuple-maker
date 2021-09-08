@@ -17,11 +17,11 @@
 
 ### Capabilities
 
-- [X] Converts Python iterable objects (`list`, `tuple`, `set`, etc.) into a `namedtuple` objects using a decorator function, **so you don't have to rewrite code that already returns iterable objects**.
+- Converts Python iterable objects (`list`, `tuple`, `set`, etc.) into a `namedtuple` objects using a decorator function, **so you don't have to rewrite code that already returns iterable objects**.
 
-- [X] Gathers `namedtuple` attribute names via either a `kwarg` in a decorated function or using prompts to collect attribute names.
+- Gathers `namedtuple` attribute names via either a `kwarg` in a decorated function or using prompts to collect attribute names.
 
-- [X] Automatically corrects attribute name entries that would be invalid.
+- Automatically corrects attribute name entries that would be invalid.
 
 ---
 
