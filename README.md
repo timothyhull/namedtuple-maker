@@ -2,26 +2,26 @@
 
 ![GitHub Actions Status](https://img.shields.io/github/workflow/status/wwt/devasc-data-formats/Markdown%20Linting?logo=github "GitHub Actions Status")
 
-## Easily Convert Python iterable objects to `namedtuple` objects
+## Easily Convert Python iterable objects into `namedtuple` objects
 
 ### Contents
 
-- [Capabilities](#mega-capabilities "Capabilities")
-- [Requirements](#warning-requirements "Requirements")
-- [Installation](#computer-installation "Installation")
-- [Usage](#rocket-usage "Usage")
-- [Background](#bulb-background "Background")
-- [`namedtuple` objects and The Zen of Python](#bamboo-namedtuple-objects-and-the-zen-of-python "The Zen of Python")
+- [Capabilities](#capabilities "Capabilities")
+- [Requirements](#requirements "Requirements")
+- [Installation](#installation "Installation")
+- [Usage](#usage "Usage")
+- [Background](#background "Background")
+- [`namedtuple` objects and The Zen of Python](#namedtuple-objects-and-the-zen-of-python "The Zen of Python")
 
 ---
 
 ### Capabilities
 
-Convert a Python iterable object into a `namedtuple` object using a decorator function.
+- [X] Converts a Python iterable object (`list`, `tuple`, `set`, etc.) into a `namedtuple` object using a decorator function.
 
-Provide the `namedtuple` attribute names in a `kwarg` of the decorated function, or enter attribute names at prompts.
+- [X] Gathers `namedtuple` attribute names via a either a `kwarg` in a decorated function or using  prompts to collect attribute names.
 
-Automatically corrects attribute name entries that would be invalid.
+- [X] Automatically corrects attribute name entries that would be invalid.
 
 ---
 
