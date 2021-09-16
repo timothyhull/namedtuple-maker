@@ -2,7 +2,7 @@
 ''' pytest tests for namedtuple_maker.py
 
     Usage:
-        pytest test_namedtuple_maker.py namedtuple_maker.py
+        pytest tests/test_namedtuple_maker.py
 '''
 
 # Imports
@@ -14,11 +14,16 @@ from typing import Iterable
 from unittest.mock import patch
 
 # Constants
+# Add description
 TEST_PERSON_INFO = namedtuple(
     typename='NamedTuple',
     field_names=TEST_DATA.keys()
 )
+
+# Add description
 TEST_EXPECTED_RESULT = TEST_PERSON_INFO(**TEST_DATA)
+
+# Add description
 TEST_INVALID_ATTRIBUTE_NAMES_DATA = (
     '_first_name',
     '$1_las*t_nam)(e',
@@ -26,7 +31,12 @@ TEST_INVALID_ATTRIBUTE_NAMES_DATA = (
     'hair color #',
     '  4eye color !@'
 )
-TEST_AUTO_NAMED_ATTRIBUTED_DATA = (f'index_{i}' for i in range(5))
+
+# Add description
+TEST_DATA_LENGTH = len(TEST_DATA.values())
+
+# Add description
+TEST_AUTO_ATTRIBUTE_NAME_DATA = (f'index_{i}' for i in range(TEST_DATA_LENGTH))
 
 
 @mark.parametrize(
@@ -127,7 +137,7 @@ def test_named_tuple_converter_input(side_effects) -> None:
         [
             TEST_DATA.values(),
             TEST_DATA.values(),
-            TEST_AUTO_NAMED_ATTRIBUTED_DATA
+            TEST_AUTO_ATTRIBUTE_NAME_DATA
         ]
     ]
 )
