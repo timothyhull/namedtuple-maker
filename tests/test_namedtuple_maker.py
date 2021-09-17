@@ -97,34 +97,37 @@ def test_named_tuple_converter(
             None.
     '''
 
-    # Get a result to test
+    # Get a namedtuple result to test
     test_result = make_named_tuple(
         iterable_input=iter_input,
         attribute_names=att_names
     )
 
-    # Verify the result is of type NamedTuple
+    # Verify the test result object is of type NamedTuple
     assert 'NamedTuple' in str(test_result.__class__)
 
-    # Verify the test tuple input data equals the namedtuple attribute values
+    # Verify the test iterable input data == the namedtuple attribute values
     assert tuple(iter_return) == tuple(test_result._asdict().values())
 
-    # Verify the field names input data equals the namedtuple attribute names
+    # Verify the field names input data == the namedtuple attribute names
     assert tuple(att_return) == test_result._fields
 
 
 @patch(
+
+    # Create mock namedtuple attribute name data for the input() function
     'builtins.input',
     side_effect=TEST_DATA.keys()
 )
 def test_named_tuple_converter_input(side_effects) -> None:
     ''' Test of the named_tuple_converter decorator function to determine if
-        the function accepts a tuple argument and returns a namedtuple
-        with the original tuple data. Collect the field names with the
-        input() function.
+        the function accepts an iterable argument and returns a namedtuple
+        with the original iterable data values. Collect the namedtuple
+        attribute names with the input() function.
 
         Args:
-            None.
+            side_effects (unittest.mock.patch):
+                namedtuple attribute mock data for the input() function.
 
         Returns:
             None.
