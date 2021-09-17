@@ -175,8 +175,8 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
         function to determine if the function accepts an iterable argument
         and returns a namedtuple with the original iterable data, and if the
         decorator function automatically names the namedtuple attributes
-        with the auto_attribute_names parameter set to True. Collect the namedtuple field
-        names from an iterable of names passed an argument.
+        with the auto_attribute_names parameter set to True. Collect the
+        namedtuple field names from an iterable of names passed an argument.
 
         Args:
             iter_input (Iterable):
@@ -198,7 +198,17 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
         iterable_input: Iterable,
         auto_attribute_names: bool
     ) -> tuple:
-        '''
+        ''' Test function that accepts an iterable object as input,
+            and returns the iterable as a tuple object.
+
+            Args:
+                iterable_input (Iterable):
+                    Iterable object to convert to a tuple object.
+
+                auto_attribute_names (bool):
+                    Boolean to specify whether or not namedtuple attribute
+                    names are automatically generated or provided as a
+                    separate argument.
         '''
 
         return tuple(iter_input)
