@@ -106,10 +106,10 @@ def test_named_tuple_converter(
     # Verify the test result object is of type NamedTuple
     assert 'NamedTuple' in str(test_result.__class__)
 
-    # Verify the test iterable input data == the namedtuple attribute values
+    # Verify the iterable input data equals the namedtuple attribute values
     assert tuple(iter_return) == tuple(test_result._asdict().values())
 
-    # Verify the field names input data == the namedtuple attribute names
+    # Verify the field names input data equals the namedtuple attribute names
     assert tuple(att_return) == test_result._fields
 
 
@@ -133,15 +133,15 @@ def test_named_tuple_converter_input(side_effects) -> None:
             None.
     '''
 
-    # Get a result to test
+    # Get a namedtuple result to test
     test_result = make_named_tuple(
         iterable_input=TEST_DATA.values(),
     )
 
-    # Verify the result is of type NamedTuple
+    # Verify the test result object is of type NamedTuple
     assert 'NamedTuple' in str(test_result.__class__)
 
-    # Verify the test tuple input data equals the namedtuple attribute values
+    # Verify the iterable input data equals the namedtuple attribute values
     assert tuple(TEST_DATA.values()) == tuple(test_result._asdict().values())
 
     # Verify the field names input data equals the namedtuple attribute names
@@ -149,11 +149,15 @@ def test_named_tuple_converter_input(side_effects) -> None:
 
 
 @mark.parametrize(
+
+    # Test data argument names (descriptions in test function docstring)
     argnames=[
         'iter_input',
         'iter_return',
         'att_return'
     ],
+
+    # Test #1  values, to test normal operation
     argvalues=[
         [
             TEST_DATA.values(),
@@ -168,14 +172,21 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
     att_return
 ) -> None:
     ''' Test of the named_tuple_converter decorator function using a custom
-        function to determine if the function accepts a tuple argument
-        and returns a namedtuple with the original tuple data, and if the
+        function to determine if the function accepts an iterable argument
+        and returns a namedtuple with the original iterable data, and if the
         decorator function automatically names the namedtuple attributes
-        with the auto_attribute_names parameter set to True. Pass the
-        namedtuple field names as an argument.
+        with the auto_attribute_names parameter set to True. Collect the namedtuple field
+        names from an iterable of names passed an argument.
 
         Args:
-            None.
+            iter_input (Iterable):
+                Iterable input to be converted to namedtuple attribute values.
+
+            att_names (Iterable):
+                Iterable input of namedtuple attribute names.
+
+            att_return (Iterable):
+                Iterable output of expected namedtuple attribute names.
 
         Returns:
             None.
