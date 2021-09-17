@@ -106,10 +106,10 @@ def test_named_tuple_converter(
     # Verify the test result object is of type NamedTuple
     assert 'NamedTuple' in str(test_result.__class__)
 
-    # Verify the iterable input data equals the namedtuple attribute values
+    # Verify the iterable input equals the namedtuple attribute values
     assert tuple(iter_return) == tuple(test_result._asdict().values())
 
-    # Verify the field names input data equals the namedtuple attribute names
+    # Verify the attribute names input equals the namedtuple attribute names
     assert tuple(att_return) == test_result._fields
 
 
@@ -141,10 +141,10 @@ def test_named_tuple_converter_input(side_effects) -> None:
     # Verify the test result object is of type NamedTuple
     assert 'NamedTuple' in str(test_result.__class__)
 
-    # Verify the iterable input data equals the namedtuple attribute values
+    # Verify the iterable input equals the namedtuple attribute values
     assert tuple(TEST_DATA.values()) == tuple(test_result._asdict().values())
 
-    # Verify the field names input data equals the namedtuple attribute names
+    # Verify the attribute names input equals the namedtuple attribute names
     assert tuple(TEST_DATA.keys()) == test_result._fields
 
 
@@ -213,17 +213,17 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
 
         return tuple(iter_input)
 
-    # Get a result to test
+    # Get a namedtuple result to test
     test_result = custom_function(
         iterable_input=iter_input,
         auto_attribute_names=True
     )
 
-    # Verify the result is of type NamedTuple
+    # Verify the test result object is of type NamedTuple
     assert 'NamedTuple' in str(test_result.__class__)
 
-    # Verify the test tuple input data equals the namedtuple attribute values
+    # Verify the iterable input equals the namedtuple attribute values
     assert tuple(iter_return) == tuple(test_result._asdict().values())
 
-    # Verify the field names input data equals the namedtuple attribute names
+    # Verify the attribute names input equals the namedtuple attribute names
     assert tuple(att_return) == test_result._fields
