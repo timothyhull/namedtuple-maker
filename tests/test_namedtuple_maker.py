@@ -7,23 +7,23 @@
 
 # Imports
 from namedtuple_maker.namedtuple_maker import named_tuple_converter, \
-                                  make_named_tuple, TEST_DATA
+                                              make_named_tuple, TEST_DATA
 from collections import namedtuple
 from pytest import mark
 from typing import Iterable
 from unittest.mock import patch
 
 # Constants
-# Add description
+# Create a namedtuple object for synthetic testing
 TEST_PERSON_INFO = namedtuple(
     typename='NamedTuple',
     field_names=TEST_DATA.keys()
 )
 
-# Add description
+# Instantiate an object from the testing namedtuple, add test data values
 TEST_EXPECTED_RESULT = TEST_PERSON_INFO(**TEST_DATA)
 
-# Add description
+# Create a tuple of attribute names with invalid characters
 TEST_INVALID_ATTRIBUTE_NAMES_DATA = (
     '_first_name',
     '$1_las*t_nam)(e',
@@ -32,27 +32,35 @@ TEST_INVALID_ATTRIBUTE_NAMES_DATA = (
     '  4eye color !@'
 )
 
-# Add description
+# Capture the number of values in the TEST_DATA object
 TEST_DATA_LENGTH = len(TEST_DATA.values())
 
-# Add description
+# Create a set of auto-generated attribute names (TEST_DATA_LENGTH # of items)
 TEST_AUTO_ATTRIBUTE_NAME_DATA = (f'index_{i}' for i in range(TEST_DATA_LENGTH))
 
 
 @mark.parametrize(
+
+    # Test data argument names (descriptions in test function docstring)
     argnames=[
         'iter_input',
-        'att_names',
-        'iter_return',
-        'att_return'
+        'att_names',    # namedtuple attribute names
+        'iter_return',  # Expected attribute value names
+        'att_return'    # Expected attribute name results
     ],
+
+    # Test data argument values
     argvalues=[
+
+        # Test #1  values, to test normal operation
         [
             TEST_DATA.values(),
             TEST_DATA.keys(),
             TEST_DATA.values(),
             TEST_DATA.keys()
         ],
+
+        # Test #2 values, to test auto-modification of invalid attribute names
         [
             TEST_DATA.values(),
             TEST_INVALID_ATTRIBUTE_NAMES_DATA,
@@ -68,12 +76,22 @@ def test_named_tuple_converter(
     att_return
 ) -> None:
     ''' Test of the named_tuple_converter decorator function to determine if
-        the function accepts a tuple argument and returns a namedtuple
-        with the original tuple data. Pass the namedtuple field names
-        as an argument.
+        the function accepts an iterable argument and returns a namedtuple
+        with the original iterable data values. Collect the namedtuple field
+        names from an iterable of names passed an argument.
 
         Args:
-            None.
+            iter_input (Iterable):
+                Iterable input to be converted to namedtuple attribute values.
+
+            att_names (Iterable):
+                Iterable input of namedtuple attribute names.
+
+            iter_return (Iterable):
+                Iterable output of expected namedtuple attribute values.
+
+            att_return (Iterable):
+                Iterable output of expected namedtuple attribute names.
 
         Returns:
             None.
