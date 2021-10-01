@@ -16,7 +16,6 @@ from collections import namedtuple
 from typing import Callable, Iterable, NamedTuple
 from functools import wraps
 from re import compile, VERBOSE
-import logbook
 
 # Initialize logging
 """ *** Logging Placeholder ***
