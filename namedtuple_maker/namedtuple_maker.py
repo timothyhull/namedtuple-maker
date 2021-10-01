@@ -13,9 +13,16 @@
 
 # Imports
 from collections import namedtuple
-from typing import Callable, Iterable
+from typing import Callable, Iterable, NamedTuple
 from functools import wraps
 from re import compile, VERBOSE
+import logbook
+
+# Initialize logging
+""" *** Logging Placeholder ***
+    Initialize Logging
+"""
+
 
 # Constants
 # Match pattern for allowed first characters in a namedtuple attribute
@@ -25,6 +32,9 @@ ATTRIBUTE_INPUT_START_CHARACTER = compile(
     ''',
     VERBOSE
 )
+""" *** Logging Placeholder ***
+    Log debug/trace message for 'Constant set...'
+"""
 
 # Match pattern for allowed non-first characters in a namedtuple attribute
 ATTRIBUTE_INPUT_INVALID_CHARACTERS = compile(
@@ -33,6 +43,9 @@ ATTRIBUTE_INPUT_INVALID_CHARACTERS = compile(
     ''',
     VERBOSE
 )
+""" *** Logging Placeholder ***
+    Log debug/trace message for 'Constant set...'
+"""
 
 # Match pattern to replace space characters in a namedtuple attribute
 ATTRIBUTE_INPUT_SPACE_CHARACTERS = compile(
@@ -41,6 +54,9 @@ ATTRIBUTE_INPUT_SPACE_CHARACTERS = compile(
     ''',
     VERBOSE
 )
+""" *** Logging Placeholder ***
+    Log debug/trace message for 'Constant set...'
+"""
 
 # Test attribute and value data for the run_make_named_tuple() function
 TEST_DATA = {
@@ -50,6 +66,9 @@ TEST_DATA = {
     'hair_color': 'brown',
     'eye_color': 'green'
 }
+""" *** Logging Placeholder ***
+    Log debug/trace message for 'Constant set...'
+"""
 
 
 def validate_attribute_input(
@@ -69,6 +88,9 @@ def validate_attribute_input(
     # Loop over each attribute name
     for index, _ in enumerate(attribute_names):
 
+        """ *** Logging Placeholder ***
+            Log debug/trace message for 'validating attribute # index'
+        """
         # Remove leading/trailing spaces and replace invalid start characters
         attribute_names[index] = ATTRIBUTE_INPUT_START_CHARACTER.sub(
             repl='',
@@ -87,6 +109,9 @@ def validate_attribute_input(
             string=attribute_names[index].strip()
         )
 
+        """ *** Logging Placeholder ***
+            Log debug/trace message for 'created name for blank attribute N'
+        """
         # Create an attribute name for a blank string
         if attribute_names[index] == '':
             attribute_names[index] = f'index_{index}'
@@ -133,58 +158,100 @@ def named_tuple_converter(function: Callable) -> Callable:
 
         # Call the decorated function
         iterable_input = function(*args, **kwargs)
+        """ *** Logging Placeholder ***
+            Log debug/trace message for 'Calling decorated function'
+        """
 
         # Convert the attribute_names argument value to a list object
         if kwargs.get('attribute_names') is not None:
             attribute_names = list(kwargs.get('attribute_names'))
+            """ *** Logging Placeholder ***
+                Log debug/trace message for 'Attribute names found...'
+            """
 
         # Collect attribute names
         else:
+            """ *** Logging Placeholder ***
+                Log debug/trace message for 'No attribute names found...'
+            """
             attribute_names = []
             for value in iterable_input:
 
                 # Set individual attribute names to a blank string
                 # The validate_attribute_input function replaces blank strings
                 if kwargs.get('auto_attribute_names') is True:
+                    """ *** Logging Placeholder ***
+                        Log debug/trace message for 'Auto attribute names set to True...'
+                    """
                     attribute_names.append('')
 
                 # Get individual attribute names via input function
                 else:
+                    """ *** Logging Placeholder ***
+                        Log debug/trace message for 'Auto attribute names False...'
+                    """
+                    """ *** Logging Placeholder ***
+                        Log debug/trace message for 'Prompting for input for attribute/value...'
+                    """
                     attribute_names.append(
                         input(
                             'Enter an attribute name for the value '
                             f'"{value}": '
                         )
                     )
+                    """ *** Logging Placeholder ***
+                        Log debug/trace message for 'Collected value N...'
+                    """
 
         # Validate attribute names
+        """ *** Logging Placeholder ***
+            Log debug/trace message for 'Validate attribute names...'
+        """
         attribute_names = validate_attribute_input(
             attribute_names=attribute_names
         )
 
         # Check for an equal number of attribute names and input values
+        """ *** Logging Placeholder ***
+            Log debug/trace message for 'Checking for equal attributes/values...'
+        """
         if len(iterable_input) == len(attribute_names):
             # Define a namedtuple object
+            """ *** Logging Placeholder ***
+                Log debug/trace message for 'Creating namedtuple object...'
+            """
             NamedTuple = namedtuple(
                 typename='NamedTuple',
                 field_names=attribute_names
             )
 
             # Create a namedtuple from the attribute names and source iterable
+            """ *** Logging Placeholder ***
+                Log debug/trace message for 'Creating namedtuple...'
+            """
             named_tuple = NamedTuple(
                 *iterable_input
             )
 
         # Raise an exception for an unequal number of attributes and inputs
         else:
+            """ *** Logging Placeholder ***
+                Log error/warn message for 'Invalid length...'
+            """
             raise ValueError(
                 'Length of iterable_input and attribute_names must be equal:\n'
                 f'iterable_input length = {len(iterable_input)}\n'
                 f'attribute_names length = {len(attribute_names)}'
             )
 
+        """ *** Logging Placeholder ***
+            Log debug/trace message for 'Returning named_tuple...'
+        """
         return named_tuple
 
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'Returning convert_to_namedtuple...'
+    """
     return convert_to_namedtuple
 
 
@@ -214,17 +281,58 @@ def make_named_tuple(
                 A tuple object of the iterable_input
     '''
 
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'make_name_tuple function called...'
+    """
+
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'Display argument values.'
+    """
+
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'Converting N to tuple...'
+    """
     tuple_output = tuple(iterable_input)
 
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'Returning tuple_output...'
+    """
     return tuple_output
 
 
-def run_make_named_tuple() -> Callable:
+def run_make_named_tuple() -> NamedTuple:
     ''' Function to run the decorated make_named_tuple function using
         TEST_DATA as a test iterable.
+
+        Args:
+            None.
+
+        Returns:
+            named_tuple (NamedTuple):
+                NamedTuple class object resulting from the make_named_tuple
+                function decorated by the named_tuple_converter function. 
     '''
 
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'run_make_name_tuple function called...'
+    """
+
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'Display notification.'
+    """
+    
+    # Display a notification
     print('\nThis is a sample run of namedtuple-generator.\n')
-    return make_named_tuple(
+
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'Calling make_named_tuple.'
+    """
+    # Call the make_named_tuple function with test data
+    named_tuple = make_named_tuple(
         iterable_input=tuple(TEST_DATA.values())
     )
+
+    """ *** Logging Placeholder ***
+        Log debug/trace message for 'Returning named_tuple.'
+    """
+    return named_tuple
