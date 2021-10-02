@@ -7,9 +7,12 @@
 
 # Imports
 import logbook
+from os import path
 
 # Constants
+LOG_FILE_PATH = path.curdir
 LOG_FILE_NAME = 'namedtuple-log.log'
+LOG_FILE = path.join(LOG_FILE_PATH, LOG_FILE_NAME)
 LOG_LEVELS = (
     'FATAL',
     'ERROR',
@@ -24,7 +27,8 @@ LOG_LEVELS = (
 
 
 def initialize_logging(
-    level: str = None
+    log_level: str = None,
+    log_file: str = LOG_FILE
 ) -> None:
     ''' Perform logging initialization functions.
 
@@ -34,42 +38,37 @@ def initialize_logging(
     '''
 
     # If no log level is passed as an argument, set a standard logging level
-    if level is None:
-        level = 'DEBUG'
+    if log_level is None:
+        log_level = 'DEBUG'
 
     # If a log level is passed as an argument, format the string
     else:
-        level = level.upper().strip()
+        log_level = log_level.upper().strip()
 
     # Confirm log level is valid
-        if level not in LOG_LEVELS:
+        if log_level not in LOG_LEVELS:
             error_message = (
-                f'The specified logging level "{level}" is invalid.\n'
-                f'Use one of the following string values:\n'
+                f'The specified logging level "{log_level}" is invalid.\n'
+                f'Use one of the following values:\n'
             )
 
-            for index, log_level in enumerate(LOG_LEVELS):
+            for index, evel in enumerate(LOG_LEVELS):
                 error_message += (f'{index + 1}. {log_level}\n')
 
             raise ValueError(
                 error_message
             )
 
-    ''' Temporary output '''
-    print(f'Logging level is {level}.\n')
-
     # Initialize logging
-    filename=LOG_FILE_NAME,
-    ''' Needs review to determine where to set the logger
-    '''
     logbook.TimedRotatingFileHandler(
-        level=level
-    )
+        level=log_level,
+        filename=log_file
+    ).push_application()
 
-    filename=LOG_FILE_NAME,
-    ''' Needs review to determine where to set the logger
-    '''
-    logging_log = logbook.Logger('Logging initializer')
-    logging_log.log(
-        level=level
+    log_init_log = logbook.Logger('Logging Initializer')
+    log_init_log.info(
+        f'Initialized {log_level} level logging.'
+    )
+    log_init_log.info(
+        f'Log file path and root name is {log_file}.'
     )
