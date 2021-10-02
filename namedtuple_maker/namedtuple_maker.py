@@ -13,28 +13,33 @@
 
 # Imports
 from collections import namedtuple
-from typing import Callable, Iterable, NamedTuple
+from typing import Callable, Iterable, List, NamedTuple
 from functools import wraps
-from namedtuple_logger import initialize_logging
 from re import compile, VERBOSE
+from namedtuple_maker.namedtuple_logger import initialize_logging
 import logbook
 
 # Initialize logging
 initialize_logging()
 application_log = logbook.Logger('Application Log')
+application_log.info('Start Application Log.')
 
 # Constants
 # Match pattern for allowed first characters in a namedtuple attribute
 ATTRIBUTE_INPUT_START_CHARACTER = compile(
     r'''
-    ^[^a-zA-Z]+   # Only start with alphabet letters
+    ^          # Start at the beginning of the line
+    [^a-zA-Z]  # Any non-alphabet character
+    +          # One or more repetitions
     ''',
     VERBOSE
 )
-# Log regex module load
-application_log.debug = 'Regex #1 loaded.'
-print('loaded regex #1')
 
+# Log regex module compilation
+application_log.debug(
+    'Compiled regular expression with pattern:'
+    f'{ATTRIBUTE_INPUT_START_CHARACTER.pattern}'
+)
 
 # Match pattern for allowed non-first characters in a namedtuple attribute
 ATTRIBUTE_INPUT_INVALID_CHARACTERS = compile(
@@ -43,9 +48,12 @@ ATTRIBUTE_INPUT_INVALID_CHARACTERS = compile(
     ''',
     VERBOSE
 )
-""" *** Logging Placeholder ***
-    Log debug/trace message for 'Constant set...'
-"""
+
+# Log regex module compilation
+application_log.debug(
+    'Compiled regular expression with pattern:'
+    f'{ATTRIBUTE_INPUT_INVALID_CHARACTERS.pattern}'
+)
 
 # Match pattern to replace space characters in a namedtuple attribute
 ATTRIBUTE_INPUT_SPACE_CHARACTERS = compile(
@@ -54,9 +62,12 @@ ATTRIBUTE_INPUT_SPACE_CHARACTERS = compile(
     ''',
     VERBOSE
 )
-""" *** Logging Placeholder ***
-    Log debug/trace message for 'Constant set...'
-"""
+
+# Log regex module compilation
+application_log.debug(
+    'Compiled regular expression with pattern:'
+    f'{ATTRIBUTE_INPUT_SPACE_CHARACTERS.pattern}'
+)
 
 # Test attribute and value data for the run_make_named_tuple() function
 TEST_DATA = {
@@ -66,35 +77,48 @@ TEST_DATA = {
     'hair_color': 'brown',
     'eye_color': 'green'
 }
-""" *** Logging Placeholder ***
-    Log debug/trace message for 'Constant set...'
-"""
+
+# Log load of test attribute data
+application_log.debug(
+    'Loaded test data:'
+    f'{TEST_DATA}'
+)
 
 
 def validate_attribute_input(
-    attribute_names: list
-) -> list:
+    attribute_names: List
+) -> List:
     ''' Validate or generate attribute names for a namedtuple.
 
         Args:
-            attribute_names (list):
+            attribute_names (List):
                 Raw list of namedtuple attribute names from user input.
 
         Returns:
-            attribute_names (list):
+            attribute_names (List):
                 Refined list of namedtuple attribute names.
     '''
 
     # Loop over each attribute name
     for index, _ in enumerate(attribute_names):
 
-        """ *** Logging Placeholder ***
-            Log debug/trace message for 'validating attribute # index'
-        """
-        # Remove leading/trailing spaces and replace invalid start characters
+        # Log each attribute validation iteration
+        application_log.debug(
+            f'Validating attribute index {index} '
+            f'with the starting value "{attribute_names[index]}"'
+        )
+
+        # Remove leading/trailing spaces and invalid start characters
         attribute_names[index] = ATTRIBUTE_INPUT_START_CHARACTER.sub(
             repl='',
             string=attribute_names[index].strip()
+        )
+
+        # Log leading/trailing space and invalid start character removal
+        application_log.debug(
+            'Removed leading/trailing spaces and invalid start characters '
+            f'in attribute index {index}, '
+            f'updated value to "{attribute_names[index]}"'
         )
 
         # Replace any invalid characters
@@ -103,18 +127,38 @@ def validate_attribute_input(
             string=attribute_names[index].strip()
         )
 
+        # Log invalid character removal
+        application_log.debug(
+            f'Removed invalid characters in attribute index {index}, '
+            f'updated value to "{attribute_names[index]}"'
+        )
+
         # Replace mid-value spaces with _
         attribute_names[index] = ATTRIBUTE_INPUT_SPACE_CHARACTERS.sub(
             repl='_',
             string=attribute_names[index].strip()
         )
 
-        """ *** Logging Placeholder ***
-            Log debug/trace message for 'created name for blank attribute N'
-        """
+        # Log mid-value space replacement
+        application_log.debug(
+            f'Replaced space characters in attribute index {index}, '
+            f'updated value to "{attribute_names[index]}"'
+        )
+
         # Create an attribute name for a blank string
         if attribute_names[index] == '':
             attribute_names[index] = f'index_{index}'
+
+            # Log attribute name creation
+            application_log.debug(
+                f'Attribute {index} is blank, created attribute name '
+                f'"{attribute_names[index]}"'
+            )
+
+    # Log return value for attribute_names
+    application_log.debug(
+        f'Returning attribute_names list with the values: {attribute_names}'
+    )
 
     return attribute_names
 
@@ -181,17 +225,17 @@ def named_tuple_converter(function: Callable) -> Callable:
                 # The validate_attribute_input function replaces blank strings
                 if kwargs.get('auto_attribute_names') is True:
                     """ *** Logging Placeholder ***
-                        Log debug/trace message for 'Auto attribute names set to True...'
+                        Log debug/trace message for 'Auto att names True...'
                     """
                     attribute_names.append('')
 
                 # Get individual attribute names via input function
                 else:
                     """ *** Logging Placeholder ***
-                        Log debug/trace message for 'Auto attribute names False...'
+                        Log debug/trace message for 'Auto att names False...'
                     """
                     """ *** Logging Placeholder ***
-                        Log debug/trace message for 'Prompting for input for attribute/value...'
+                        Log debug/trace message for 'Input prompt for...'
                     """
                     attribute_names.append(
                         input(
@@ -213,7 +257,7 @@ def named_tuple_converter(function: Callable) -> Callable:
 
         # Check for an equal number of attribute names and input values
         """ *** Logging Placeholder ***
-            Log debug/trace message for 'Checking for equal attributes/values...'
+            Log debug/trace message for 'Checking for equal att/values...'
         """
         if len(iterable_input) == len(attribute_names):
             # Define a namedtuple object
@@ -310,7 +354,7 @@ def run_make_named_tuple() -> NamedTuple:
         Returns:
             named_tuple (NamedTuple):
                 NamedTuple class object resulting from the make_named_tuple
-                function decorated by the named_tuple_converter function. 
+                function decorated by the named_tuple_converter function.
     '''
 
     """ *** Logging Placeholder ***
