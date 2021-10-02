@@ -15,13 +15,13 @@
 from collections import namedtuple
 from typing import Callable, Iterable, NamedTuple
 from functools import wraps
+from namedtuple_logger import initialize_logging
 from re import compile, VERBOSE
+import logbook
 
 # Initialize logging
-""" *** Logging Placeholder ***
-    Initialize Logging
-"""
-
+initialize_logging()
+application_log = logbook.Logger('Application Log')
 
 # Constants
 # Match pattern for allowed first characters in a namedtuple attribute
@@ -31,9 +31,10 @@ ATTRIBUTE_INPUT_START_CHARACTER = compile(
     ''',
     VERBOSE
 )
-""" *** Logging Placeholder ***
-    Log debug/trace message for 'Constant set...'
-"""
+# Log regex module load
+application_log.debug = 'Regex #1 loaded.'
+print('loaded regex #1')
+
 
 # Match pattern for allowed non-first characters in a namedtuple attribute
 ATTRIBUTE_INPUT_INVALID_CHARACTERS = compile(
@@ -319,7 +320,7 @@ def run_make_named_tuple() -> NamedTuple:
     """ *** Logging Placeholder ***
         Log debug/trace message for 'Display notification.'
     """
-    
+
     # Display a notification
     print('\nThis is a sample run of namedtuple-generator.\n')
 
