@@ -99,6 +99,11 @@ def validate_attribute_input(
                 Refined list of namedtuple attribute names.
     '''
 
+    # Log start of attribute name validation
+    application_log.info(
+        'Start namedtuple attribute name validation.'
+    )
+
     # Loop over each attribute name
     for index, _ in enumerate(attribute_names):
 
@@ -156,7 +161,8 @@ def validate_attribute_input(
             )
 
     # Log return value for attribute_names
-    application_log.debug(
+    application_log.info(
+        'Attribute validation complete. '
         f'Returning attribute_names list with the values: {attribute_names}'
     )
 
@@ -174,6 +180,17 @@ def named_tuple_converter(function: Callable) -> Callable:
             convert_to_namedtuple (Callable):
                 Decorated function
     '''
+
+    # Log the start of the decorator function
+    application_log.info(
+        'Start run of the decorator function named_tuple_converter.'
+    )
+
+    # Log the use of the @wraps decorator
+    application_log.debug(
+        'Pass the decorated function in the function parameter to the '
+        '@wraps decorator, to preserve the decorated function\'s docstring.'
+    )
 
     # Use @wraps to preserve the docstring of the function to decorate
     @wraps(function)
@@ -200,25 +217,68 @@ def named_tuple_converter(function: Callable) -> Callable:
                 Class NamedTuple instantiated from collections.namedtuple
         '''
 
+        # Log the start of the function decorated by @wraps
+        application_log.info(
+            'Start run of the function decorated by at @wraps '
+            'named convert_to_namedtuple.'
+        )
+
+        # Log the decorated function call, passed by the function parameter
+        application_log.debug(
+            f'Calling the decorated function "{function.__name__}".\n'
+            f'*args: {(args)}\n'
+            f'**kwargs: {kwargs}'
+        )
+
         # Call the decorated function
         iterable_input = function(*args, **kwargs)
-        """ *** Logging Placeholder ***
-            Log debug/trace message for 'Calling decorated function'
-        """
+
+        # Log the decorated function call result
+        application_log.debug(
+            f'Call to decorated function {function.__name__} returned '
+            f'The iterable_input value {iterable_input}'
+        )
+
+        # Log a presence check for the attribute_names kwarg
+        application_log.info(
+            'Checking for the presence of the attribute_names kwarg.'
+        )
 
         # Convert the attribute_names argument value to a list object
         if kwargs.get('attribute_names') is not None:
             attribute_names = list(kwargs.get('attribute_names'))
-            """ *** Logging Placeholder ***
-                Log debug/trace message for 'Attribute names found...'
-            """
+
+            # Log a presence check for the attribute_names kwarg
+            application_log.info(
+                'attribute_names kwarg found.'
+            )
+
+            # Log the value of the attribute names kwarg
+            application_log.debug(
+                'attribute_names kwarg contains the values:\n'
+                f'{attribute_names}'
+            )
 
         # Collect attribute names
         else:
-            """ *** Logging Placeholder ***
-                Log debug/trace message for 'No attribute names found...'
-            """
+
+            # Log the the result of a None value for the kwarg attribute_names
+            application_log.info(
+                'attribute_names kwarg not found.'
+            )
+
+            # Log setting the attribute_names variable to None
+            application_log.debug(
+                f'attribute_names kwarg set to a value of {None}.'
+            )
+
             attribute_names = []
+
+            # Log setting the attribute_names variable to a blank list
+            application_log.debug(
+                f'attribute_names kwarg set to a value of {None}.'
+            )
+
             for value in iterable_input:
 
                 # Set individual attribute names to a blank string
