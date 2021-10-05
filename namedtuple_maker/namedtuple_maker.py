@@ -295,7 +295,7 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log entry
             # Log setting the attribute_names variable to None
             application_log.debug(
-                f'"attribute_names" kwarg set to a value of "{None}".'
+                f'"attribute_names" kwarg set to a value of {None}.'
             )
 
             # Log entry
@@ -334,84 +334,198 @@ def named_tuple_converter(function: Callable) -> Callable:
                     '"auto_attribute_names" kwarg.'
                 )
 
-                # Log entry
-                # End point for current day, placeholder for next day
-
                 # Set individual attribute names to a blank string
                 # The validate_attribute_input function replaces blank strings
                 if kwargs.get('auto_attribute_names') is True:
-                    """ *** Logging Placeholder ***
-                        Log debug/trace message for 'Auto att names True...'
-                    """
+
+                    # Log Entry
+                    # Log the presence of the auto_attribute_names argument
+                    application_log.info(
+                        f'"auto_attribute_names" is {True}, auto-naming '
+                        f'attribute index {index}.'
+                    )
+
+                    # Log Entry
+                    # Log setting the current attribute index value to ''
+                    application_log.debug(
+                        f'Setting name for attribute "{value}" to {""}.'
+                    )
                     attribute_names.append('')
 
                 # Get individual attribute names via input function
                 else:
-                    """ *** Logging Placeholder ***
-                        Log debug/trace message for 'Auto att names False...'
-                    """
-                    """ *** Logging Placeholder ***
-                        Log debug/trace message for 'Input prompt for...'
-                    """
+
+                    # Log Entry
+                    # Log the absence of the auto_attribute_names argument
+                    application_log.info(
+                        f'"auto_attribute_names" is {False}, prompting for '
+                        f'name to assign the attribute {value}.'
+                    )
+
+                    # Log Entry
+                    # Log input method call, to prompt for attribute name
+                    application_log.debug(
+                        'Calling "input" method to collect attribute name.'
+                    )
+
+                    # Append the input value to the attribute_names list
                     attribute_names.append(
                         input(
                             'Enter an attribute name for the value '
                             f'"{value}": '
                         )
                     )
-                    """ *** Logging Placeholder ***
-                        Log debug/trace message for 'Collected value N...'
-                    """
+
+                    # Log Entry
+                    # Log value collected from input method
+                    application_log.info(
+                        'User input the attribute name '
+                        'f"{attribute_names[-1]}" for the value "{value}".'
+                    )
+
+        # Log Entry
+        # Log start of attribute name validation
+        application_log.info(
+            'Start attribute name validation.'
+        )
+
+        # Log Entry
+        # Log function call to validate_attribute_input
+        application_log.debug(
+            'Calling the "validate_attribute_input" function, sending the '
+            'list "attribute_names" as an argument with the value:\n'
+            f'{attribute_names}'
+        )
 
         # Validate attribute names
-        """ *** Logging Placeholder ***
-            Log debug/trace message for 'Validate attribute names...'
-        """
         attribute_names = validate_attribute_input(
             attribute_names=attribute_names
         )
 
-        # Check for an equal number of attribute names and input values
-        """ *** Logging Placeholder ***
-            Log debug/trace message for 'Checking for equal att/values...'
-        """
+        # Log Entry
+        # Log end of attribute name validation
+        application_log.info(
+            'Attribute name validation complete.'
+        )
+
+        # Log Entry
+        # Log check for an equal number of attribute names and iterable values
+        application_log.info(
+            'Check for an equal number of attribute names and values '
+            'before constructing namedtuple.'
+        )
+
+        # Log Entry
+        # Log count of attribute names and iterable values
+        application_log.debug(
+            f'"attribute_name" length is {len(attribute_names)} and '
+            f'"iterable_input" count is {len(iterable_input)}.'
+        )
+
+        # Check for an equal number of attribute names and iterable values
         if len(iterable_input) == len(attribute_names):
+
+            # Log Entry
+            # Log equal result of attribute name and value count comparision
+            application_log.info(
+                'Number of attribute names and values is equivalent, '
+                'creating namedtuple.'
+            )
+
             # Define a namedtuple object
-            """ *** Logging Placeholder ***
-                Log debug/trace message for 'Creating namedtuple object...'
-            """
             NamedTuple = namedtuple(
                 typename='NamedTuple',
                 field_names=attribute_names
             )
 
+            # Log Entry
+            # Log creation of the NamedTuple class
+            application_log.debug(
+                'Created namedtuple class with the name "NamedTuple" and '
+                f'assigned the attribute names:\n{NamedTuple._fields}.'
+            )
+
+            # Log Entry
+            # Log instantion of namedtuple object from the NamedTuple class
+            application_log.info(
+                'Instantiating namedtuple object with the name "named_tuple" '
+                'from the "NamedTuple class.'
+            )
+
+            # Log Entry
+            # Log named_tuple instantiation
+            application_log.debug(
+                f'Passing the values {iterable_input} to the "NamedTuple" '
+                'class, and assigning result to the variable "named_tuple".'
+            )
+
             # Create a namedtuple from the attribute names and source iterable
-            """ *** Logging Placeholder ***
-                Log debug/trace message for 'Creating namedtuple...'
-            """
             named_tuple = NamedTuple(
                 *iterable_input
             )
 
+            # Log Entry
+            # Log result of named_tuple instantiation
+            application_log.debug(
+                'Created namedtuple object "named_tuple":\n'
+                f'{named_tuple}'
+            )
+
         # Raise an exception for an unequal number of attributes and inputs
         else:
-            """ *** Logging Placeholder ***
-                Log error/warn message for 'Invalid length...'
-            """
+
+            # Log Entry
+            # Log unequal result of attribute name and value count comparision
+            application_log.info(
+                'Number of attribute names and values is not equivalent, '
+                'raising exception.'
+            )
+
+            # Log Entry
+            # Log raise of ValueError for unequal attribute name/value count
+            application_log.error(
+                f'Raising {ValueError} for due to unequal length of '
+                f'"iterable_input" ({len(iterable_input)}) and '
+                f'"attribute_names" ({len(attribute_names)}) objects.'
+            )
+
             raise ValueError(
                 'Length of iterable_input and attribute_names must be equal:\n'
                 f'iterable_input length = {len(iterable_input)}\n'
                 f'attribute_names length = {len(attribute_names)}'
             )
 
-        """ *** Logging Placeholder ***
-            Log debug/trace message for 'Returning named_tuple...'
-        """
+        # Log Entry
+        # Log return of convert_to_namedtuple function to named_tuple_converter
+        application_log.info(
+            'Function "convert_to_namedtuple" returning named_tuple object '
+            '"named_tuple" to the calling function "named_tuple_converter".'
+        )
+
+        # Log Entry
+        # Log returned value of convert_to_namedtuple
+        application_log.debug(
+            'Returning object "named_tuple" with the value:\n'
+            f'{named_tuple}'
+        )
+
         return named_tuple
 
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'Returning convert_to_namedtuple...'
-    """
+    # Log Entry
+    # Log return of named_tuple to named_tuple_converter function
+    application_log.info(
+        'Function "named_tuple_converter" returning function/Callable object '
+        '"convert_to_namedtuple" to calling decorator function '
+        '"named_tuple_converter".'
+    )
+
+    # Log Entry
+    # Log returned value of named_tuple_converter function
+    application_log.debug(
+        'Returning object "convert_to_namedtuple" with the value:\n'
+        f'{convert_to_namedtuple}'
+    )
+
     return convert_to_namedtuple
 
 
