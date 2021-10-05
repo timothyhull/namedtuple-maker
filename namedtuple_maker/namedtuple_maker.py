@@ -176,7 +176,7 @@ def validate_attribute_input(
     # Log return value for attribute_names
     application_log.info(
         'Attribute validation complete. '
-        f'Returning attribute_names list with the values: {attribute_names}'
+        f'Returning "attribute_names" list with the values: {attribute_names}'
     )
 
     return attribute_names
@@ -197,14 +197,14 @@ def named_tuple_converter(function: Callable) -> Callable:
     # Log entry
     # Log the start of the decorator function
     application_log.info(
-        'Start run of the decorator function named_tuple_converter.'
+        'Start run of the decorator function "named_tuple_converter".'
     )
 
     # Log entry
     # Log the use of the @wraps decorator
     application_log.debug(
         f'Pass the decorated function "{function.__name__}" in the function '
-        'parameter to the @wraps decorator, to preserve the decorated '
+        'parameter to the "@wraps" decorator, to preserve the decorated '
         'function\'s docstring.'
     )
 
@@ -236,14 +236,15 @@ def named_tuple_converter(function: Callable) -> Callable:
         # Log entry
         # Log the start of the function decorated by @wraps
         application_log.info(
-            'Start run of the function decorated by at @wraps '
-            'named convert_to_namedtuple.'
+            'Start run of the function decorated by at "@wraps" '
+            'named "convert_to_namedtuple".'
         )
 
         # Log entry
         # Log the decorated function call, passed by the function parameter
         application_log.debug(
-            f'Calling the decorated function "{function.__name__}".\n'
+            f'Calling the decorated function "{function.__name__}" '
+            'with the argument values:\n'
             f'*args: {(args)}\n'
             f'**kwargs: {kwargs}'
         )
@@ -254,14 +255,15 @@ def named_tuple_converter(function: Callable) -> Callable:
         # Log entry
         # Log the decorated function call result
         application_log.debug(
-            f'Call to decorated function {function.__name__} returned '
-            f'The iterable_input value {iterable_input}'
+            f'Call to decorated function "{function.__name__}" returned '
+            f'The "iterable_input" value {iterable_input}'
         )
 
         # Log entry
         # Log a presence check for the attribute_names kwarg
         application_log.info(
-            'Checking for presence of the attribute_names kwarg.'
+            'Checking for presence of the "attribute_names" kwarg using '
+            'the "dict.get" method.'
         )
 
         # Convert the attribute_names argument value to a list object
@@ -271,13 +273,13 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log entry
             # Log a presence check for the attribute_names kwarg
             application_log.info(
-                'attribute_names kwarg found.'
+                '"attribute_names" kwarg found.'
             )
 
             # Log entry
             # Log the value of the attribute names kwarg
             application_log.debug(
-                'attribute_names kwarg contains the values:\n'
+                '"attribute_names" kwarg contains the values:\n'
                 f'{attribute_names}'
             )
 
@@ -287,19 +289,19 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log entry
             # Log the the result of a None value for the kwarg attribute_names
             application_log.info(
-                'attribute_names kwarg not found.'
+                '"attribute_names" kwarg not found.'
             )
 
             # Log entry
             # Log setting the attribute_names variable to None
             application_log.debug(
-                f'attribute_names kwarg set to a value of "{None}".'
+                f'"attribute_names" kwarg set to a value of "{None}".'
             )
 
             # Log entry
             # Log before setting the attribute_names variable to a blank list
             application_log.debug(
-                f'Setting attribute_names to a value of an empty list ({[]}).'
+                f'Setting "attribute_names" value to an empty list ({[]}).'
             )
 
             attribute_names = []
@@ -307,13 +309,14 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log entry
             # Log setting the attribute_names variable to a blank list
             application_log.debug(
-                f'attribute_names kwarg set to a value of "{attribute_names}".'
+                f'"attribute_names" kwarg value set to "{attribute_names}".'
             )
 
             # Log entry
             # Log start of loop over iterable_input
             application_log.info(
-                'Start loop over the iterable_input kwarg.'
+                'Start loop over the "iterable_input" kwarg, and prompt '
+                'for names to assign each namedtuple attribute.'
             )
 
             for index, value in enumerate(iterable_input):
@@ -321,13 +324,14 @@ def named_tuple_converter(function: Callable) -> Callable:
                 # Log entry
                 # Log loop iteration information
                 application_log.debug(
-                    f'Loop iteration {index}, with a value of "{value}".'
+                    f'Attribute {index}, with a value of "{value}".'
                 )
 
                 # Log entry
                 # Log a presence check for the auto_attribute_names kwarg
                 application_log.info(
-                    'Checking for presence of the auto_attribute_names kwarg.'
+                    'Checking for presence of the '
+                    '"auto_attribute_names" kwarg.'
                 )
 
                 # Log entry
