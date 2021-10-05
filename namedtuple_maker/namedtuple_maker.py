@@ -203,7 +203,7 @@ def named_tuple_converter(function: Callable) -> Callable:
     # Log entry
     # Log the use of the @wraps decorator
     application_log.debug(
-        f'Pass the decorated function "{function.__name__}" in the function '
+        f'Pass the decorated function "{function.__name__}" in the "function" '
         'parameter to the "@wraps" decorator, to preserve the decorated '
         'function\'s docstring.'
     )
@@ -295,7 +295,7 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log entry
             # Log setting the attribute_names variable to None
             application_log.debug(
-                f'"attribute_names" kwarg set to a value of {None}.'
+                f'"attribute_names" kwarg set to a value of "{None}".'
             )
 
             # Log entry
@@ -324,7 +324,7 @@ def named_tuple_converter(function: Callable) -> Callable:
                 # Log entry
                 # Log loop iteration information
                 application_log.debug(
-                    f'Attribute {index}, with a value of "{value}".'
+                    f'Attribute {index} value is "{value}".'
                 )
 
                 # Log entry
@@ -341,14 +341,14 @@ def named_tuple_converter(function: Callable) -> Callable:
                     # Log Entry
                     # Log the presence of the auto_attribute_names argument
                     application_log.info(
-                        f'"auto_attribute_names" is {True}, auto-naming '
+                        f'"auto_attribute_names" is "{True}", auto-naming '
                         f'attribute index {index}.'
                     )
 
                     # Log Entry
                     # Log setting the current attribute index value to ''
                     application_log.debug(
-                        f'Setting name for attribute "{value}" to {""}.'
+                        f'Setting name for attribute "{value}" to "\'\'".'
                     )
                     attribute_names.append('')
 
@@ -358,8 +358,8 @@ def named_tuple_converter(function: Callable) -> Callable:
                     # Log Entry
                     # Log the absence of the auto_attribute_names argument
                     application_log.info(
-                        f'"auto_attribute_names" is {False}, prompting for '
-                        f'name to assign the attribute {value}.'
+                        f'"auto_attribute_names" is "{False}", prompting for '
+                        f'name to assign the attribute value "{value}".'
                     )
 
                     # Log Entry
@@ -380,7 +380,7 @@ def named_tuple_converter(function: Callable) -> Callable:
                     # Log value collected from input method
                     application_log.info(
                         'User input the attribute name '
-                        'f"{attribute_names[-1]}" for the value "{value}".'
+                        f'"{attribute_names[-1]}" for the value "{value}".'
                     )
 
         # Log Entry
