@@ -555,22 +555,57 @@ def make_named_tuple(
                 A tuple object of the iterable_input
     '''
 
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'make_name_tuple function called...'
-    """
+    # Log entry
+    # Log start of make_named_tuple function
+    application_log.info(
+        'Start run of the function "make_named_tuple".'
+    )
 
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'Display argument values.'
-    """
+    # Log entry
+    # Log display of function argument values
+    application_log.debug(
+        '"make_named_tuple" argument values:\n'
+        f'iterable_input: {iterable_input}\n'
+        f'attribute_names: {attribute_names}\n'
+        f'auto_attribute_names: {auto_attribute_names}'
+    )
 
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'Converting N to tuple...'
-    """
+    # Log entry
+    # Log attempt to convert iterable_input to a tuple
+    application_log.info(
+        'Attempting to convert the "iterable_input" argument value '
+        'to a tuple object.'
+    )
+
+    # Convert iterable input into a tuple object
     tuple_output = tuple(iterable_input)
 
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'Returning tuple_output...'
-    """
+    # Log entry
+    # Log successful attempt to convert iterable_input to a tuple
+    application_log.info(
+        '"iterable_input" argument successfully converted to a tuple object.'
+    )
+
+    # Log entry
+    # Log attempt to convert iterable_input to a tuple
+    application_log.debug(
+        'Converted "iterable_input" argument value to a tuple object'
+        'with the value:\n'
+        f'{print(iterable_input)}'
+    )
+
+    # Log Entry
+    # Log return of make_named_tuple function to named_tuple_converter
+    application_log.info(
+        'Function "make_named_tuple" returning the "tuple_output object.'
+    )
+
+    # Log Entry
+    # Log returned value of convert_to_namedtuple
+    application_log.debug(
+        'Returning object "tuple_output" with the value:\n'
+        f'{tuple_output}'
+    )
     return tuple_output
 
 
