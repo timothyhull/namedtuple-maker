@@ -263,8 +263,14 @@ def named_tuple_converter(function: Callable) -> Callable:
         # Log entry
         # Log a presence check for the attribute_names kwarg
         application_log.info(
-            'Checking for presence of the "attribute_names" kwarg using '
-            'the "dict.get" method.'
+            'Checking for presence of the "attribute_names" argument'
+        )
+
+        # Log entry
+        # Log a presence check for the attribute_names kwarg
+        application_log.debug(
+            'Use the "dict.get" method to check for the '
+            '"attribute_names" kwarg.'
         )
 
         # Convert the attribute_names argument value to a list object
@@ -272,9 +278,9 @@ def named_tuple_converter(function: Callable) -> Callable:
             attribute_names = list(kwargs.get('attribute_names'))
 
             # Log entry
-            # Log a presence check for the attribute_names kwarg
+            # Log a presence check for the attribute_names argument
             application_log.info(
-                '"attribute_names" kwarg found.'
+                '"attribute_names" argument found.'
             )
 
             # Log entry
@@ -296,7 +302,7 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log entry
             # Log setting the attribute_names variable to None
             application_log.debug(
-                f'"attribute_names" kwarg set to a value of "{None}".'
+                '"attribute_names" kwarg set to a value of "None".'
             )
 
             # Log entry
@@ -316,7 +322,7 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log entry
             # Log start of loop over iterable_input
             application_log.info(
-                'Start loop over the "iterable_input" kwarg, and prompt '
+                'Start loop over the "iterable_input" argument, and prompt '
                 'for names to assign each namedtuple attribute.'
             )
 
@@ -325,14 +331,14 @@ def named_tuple_converter(function: Callable) -> Callable:
                 # Log entry
                 # Log loop iteration information
                 application_log.debug(
-                    f'Attribute {index} value is "{value}".'
+                    f'Attribute with index {index} value is "{value}".'
                 )
 
                 # Log entry
                 # Log a presence check for the auto_attribute_names kwarg
                 application_log.info(
                     'Checking for presence of the '
-                    '"auto_attribute_names" kwarg.'
+                    '"auto_attribute_names" argument.'
                 )
 
                 # Set individual attribute names to a blank string
@@ -342,7 +348,7 @@ def named_tuple_converter(function: Callable) -> Callable:
                     # Log Entry
                     # Log the presence of the auto_attribute_names argument
                     application_log.info(
-                        f'"auto_attribute_names" is "{True}", auto-naming '
+                        '"auto_attribute_names" is "True", auto-naming '
                         f'attribute index {index}.'
                     )
 
@@ -359,7 +365,7 @@ def named_tuple_converter(function: Callable) -> Callable:
                     # Log Entry
                     # Log the absence of the auto_attribute_names argument
                     application_log.info(
-                        f'"auto_attribute_names" is "{False}", prompting for '
+                        '"auto_attribute_names" is "False", prompting for '
                         f'name to assign the attribute value "{value}".'
                     )
 
@@ -450,7 +456,7 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log instantion of namedtuple object from the NamedTuple class
             application_log.info(
                 'Instantiating namedtuple object with the name "named_tuple" '
-                'from the "NamedTuple class.'
+                'from the "NamedTuple" class.'
             )
 
             # Log Entry
@@ -583,11 +589,17 @@ def make_named_tuple(
         tuple_output = tuple(iterable_input)
 
         # Log entry
+        # Log successful attempt to convert iterable_input to a tuple
+        application_log.info(
+            '"iterable_input" successfully converted to a tuple object.'
+        )
+
+        # Log entry
         # Log conversion of iterable_input to a tuple
         application_log.debug(
-            'Converted "iterable_input" argument value to a tuple object'
+            'Converted "iterable_input" argument value to a tuple object '
             'with the value:\n'
-            f'\t{print(iterable_input)}'
+            f'\t{iterable_input}'
         )
 
     except Exception as e:
@@ -612,12 +624,6 @@ def make_named_tuple(
 
         # Graceful exit with status code
         exit(1)
-
-    # Log entry
-    # Log successful attempt to convert iterable_input to a tuple
-    application_log.info(
-        '"iterable_input" argument successfully converted to a tuple object.'
-    )
 
     # Log Entry
     # Log return of make_named_tuple function to named_tuple_converter
