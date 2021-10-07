@@ -15,8 +15,9 @@
 from collections import namedtuple
 from typing import Callable, Iterable, List, NamedTuple
 from functools import wraps
-from re import compile, VERBOSE
 from namedtuple_maker.namedtuple_logger import initialize_logging
+from re import compile, VERBOSE
+from sys import exit, stderr
 import logbook
 
 # Initialize logging
@@ -578,20 +579,44 @@ def make_named_tuple(
     )
 
     # Convert iterable input into a tuple object
-    tuple_output = tuple(iterable_input)
+    try:
+        tuple_output = tuple(iterable_input)
+
+        # Log entry
+        # Log conversion of iterable_input to a tuple
+        application_log.debug(
+            'Converted "iterable_input" argument value to a tuple object'
+            'with the value:\n'
+            f'\t{print(iterable_input)}'
+        )
+
+    except Exception as e:
+
+        # Set error message value
+        error_message = (
+            'Unable to convert "iterable_input" value to a tuple object.'
+        )
+
+        # Log Entry
+        # Log exception attempting to convert interable_input to a tuple
+        application_log.error(
+            f'{error_message}\n'
+            f'\t"iterable_input" value: {iterable_input}'
+            f'\t"iterable_input" type: {type(iterable_input)}'
+        )
+        application_log.exception(e)
+
+        # Write error message to STDERR
+        print(f'{error_message}\n')
+        print(f'{e!r}', file=stderr)
+
+        # Graceful exit with status code
+        exit(1)
 
     # Log entry
     # Log successful attempt to convert iterable_input to a tuple
     application_log.info(
         '"iterable_input" argument successfully converted to a tuple object.'
-    )
-
-    # Log entry
-    # Log attempt to convert iterable_input to a tuple
-    application_log.debug(
-        'Converted "iterable_input" argument value to a tuple object'
-        'with the value:\n'
-        f'\t{print(iterable_input)}'
     )
 
     # Log Entry
