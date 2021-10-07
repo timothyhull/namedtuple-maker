@@ -17,6 +17,7 @@ from typing import Callable, Iterable, List, NamedTuple
 from functools import wraps
 from namedtuple_maker.namedtuple_logger import initialize_logging
 from re import compile, VERBOSE
+from os import _exit
 from sys import exit, stderr
 import logbook
 
@@ -606,7 +607,8 @@ def make_named_tuple(
 
         # Set error message value
         error_message = (
-            'Unable to convert "iterable_input" value to a tuple object.'
+            'Unable to convert "iterable_input" value to a tuple object. '
+            'See the log file for details.'
         )
 
         # Log Entry
@@ -619,11 +621,19 @@ def make_named_tuple(
         application_log.exception(e)
 
         # Write error message to STDERR
-        print(f'{error_message}\n')
-        print(f'{e!r}', file=stderr)
+        print(f'\n{error_message}')
+        print(f'{e!r}\n', file=stderr)
 
         # Graceful exit with status code
-        exit(1)
+        try:
+
+            # Standard sys.exit
+            exit(1)
+
+        except SystemExit:
+
+            # Exit from an interactive REPL shell with os._exit
+            _exit(1)
 
     # Log Entry
     # Log return of make_named_tuple function to named_tuple_converter
