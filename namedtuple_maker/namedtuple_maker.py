@@ -42,7 +42,7 @@ ATTRIBUTE_INPUT_START_CHARACTER = compile(
 # Log regex module compilation
 application_log.debug(
     'Compiled regular expression with pattern:'
-    f'{ATTRIBUTE_INPUT_START_CHARACTER.pattern}'
+    f'\t{ATTRIBUTE_INPUT_START_CHARACTER.pattern}'
 )
 
 # Match pattern for allowed non-first characters in a namedtuple attribute
@@ -57,7 +57,7 @@ ATTRIBUTE_INPUT_INVALID_CHARACTERS = compile(
 # Log regex module compilation
 application_log.debug(
     'Compiled regular expression with pattern:'
-    f'{ATTRIBUTE_INPUT_INVALID_CHARACTERS.pattern}'
+    f'\t{ATTRIBUTE_INPUT_INVALID_CHARACTERS.pattern}'
 )
 
 # Match pattern to replace space characters in a namedtuple attribute
@@ -72,7 +72,7 @@ ATTRIBUTE_INPUT_SPACE_CHARACTERS = compile(
 # Log regex module compilation
 application_log.debug(
     'Compiled regular expression with pattern:'
-    f'{ATTRIBUTE_INPUT_SPACE_CHARACTERS.pattern}'
+    f'\t{ATTRIBUTE_INPUT_SPACE_CHARACTERS.pattern}'
 )
 
 # Test attribute and value data for the run_make_named_tuple() function
@@ -88,7 +88,7 @@ TEST_DATA = {
 # Log load of test attribute data
 application_log.debug(
     'Loaded test data:'
-    f'{TEST_DATA}'
+    f'\t{TEST_DATA}'
 )
 
 
@@ -280,7 +280,7 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log the value of the attribute names kwarg
             application_log.debug(
                 '"attribute_names" kwarg contains the values:\n'
-                f'{attribute_names}'
+                f'\t{attribute_names}'
             )
 
         # Collect attribute names
@@ -394,7 +394,7 @@ def named_tuple_converter(function: Callable) -> Callable:
         application_log.debug(
             'Calling the "validate_attribute_input" function, sending the '
             'list "attribute_names" as an argument with the value:\n'
-            f'{attribute_names}'
+            f'\t{attribute_names}'
         )
 
         # Validate attribute names
@@ -468,7 +468,7 @@ def named_tuple_converter(function: Callable) -> Callable:
             # Log result of named_tuple instantiation
             application_log.debug(
                 'Created namedtuple object "named_tuple":\n'
-                f'{named_tuple}'
+                f'\t{named_tuple}'
             )
 
         # Raise an exception for an unequal number of attributes and inputs
@@ -506,7 +506,7 @@ def named_tuple_converter(function: Callable) -> Callable:
         # Log returned value of convert_to_namedtuple
         application_log.debug(
             'Returning object "named_tuple" with the value:\n'
-            f'{named_tuple}'
+            f'\t{named_tuple}'
         )
 
         return named_tuple
@@ -523,7 +523,7 @@ def named_tuple_converter(function: Callable) -> Callable:
     # Log returned value of named_tuple_converter function
     application_log.debug(
         'Returning object "convert_to_namedtuple" with the value:\n'
-        f'{convert_to_namedtuple}'
+        f'\t{convert_to_namedtuple}'
     )
 
     return convert_to_namedtuple
@@ -556,7 +556,7 @@ def make_named_tuple(
     '''
 
     # Log entry
-    # Log start of make_named_tuple function
+    # Log the start of the make_named_tuple function
     application_log.info(
         'Start run of the function "make_named_tuple".'
     )
@@ -591,7 +591,7 @@ def make_named_tuple(
     application_log.debug(
         'Converted "iterable_input" argument value to a tuple object'
         'with the value:\n'
-        f'{print(iterable_input)}'
+        f'\t{print(iterable_input)}'
     )
 
     # Log Entry
@@ -604,7 +604,7 @@ def make_named_tuple(
     # Log returned value of convert_to_namedtuple
     application_log.debug(
         'Returning object "tuple_output" with the value:\n'
-        f'{tuple_output}'
+        f'\t{tuple_output}'
     )
     return tuple_output
 
@@ -622,26 +622,73 @@ def run_make_named_tuple() -> NamedTuple:
                 function decorated by the named_tuple_converter function.
     '''
 
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'run_make_name_tuple function called...'
-    """
-
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'Display notification.'
-    """
-
-    # Display a notification
-    print('\nThis is a sample run of namedtuple-generator.\n')
-
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'Calling make_named_tuple.'
-    """
-    # Call the make_named_tuple function with test data
-    named_tuple = make_named_tuple(
-        iterable_input=tuple(TEST_DATA.values())
+    # Log Entry
+    # Log the start of the run_make_named_tuple function
+    application_log.info(
+        'Start run of the function "run_make_named_tuple".'
     )
 
-    """ *** Logging Placeholder ***
-        Log debug/trace message for 'Returning named_tuple.'
-    """
+    # Log Entry
+    # Log the creation of a notification message
+    application_log.debug(
+        'Set notification message string.'
+    )
+
+    # Set notification message
+    notification_message = (
+        '\nThis is a sample run of the namedtuple_maker application.\n'
+    )
+    notification_message += f'{"-" * len(notification_message.strip())}\n'
+
+    # Log Entry
+    # Log the display of a notification message
+    application_log.debug(
+        'Display the notification message:\n'
+        f'\t{notification_message}'
+    )
+
+    # Display the notification message
+    print(notification_message)
+
+    # Log Entry
+    # Log the creation of the iterable_input variable with argument data
+    application_log.debug(
+        'Create the "iterable_input" variable and assign a value to pass '
+        'as an argument to the "make_named_tuple" function.'
+    )
+
+    # Set variable with data to pass to make_named_tuple as arguments
+    iterable_input = tuple(TEST_DATA.values())
+
+    # Log Entry
+    # Log the value of the iterable_input variable
+    application_log.debug(
+        '"iterable_input" value set to:\n'
+        f'\t{iterable_input}'
+    )
+
+    # Log Entry
+    # Log call of the make_named_tuple function
+    application_log.info(
+        'Calling the "make_named_tuple" function.'
+    )
+
+    # Call the make_named_tuple function with test data
+    named_tuple = make_named_tuple(
+        iterable_input=iterable_input
+    )
+
+    # Log Entry
+    # Log the value of named_tuple
+    application_log.debug(
+        '"make_named_tuple" function return value assigned to "named_tuple":\n'
+        f'\t{named_tuple}'
+    )
+
+    # Log Entry
+    # Log return value of named_tuple
+    application_log.info(
+        'Function "run_make_named_tuple" returning the "named_tuple" object.'
+    )
+
     return named_tuple
