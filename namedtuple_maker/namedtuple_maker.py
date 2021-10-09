@@ -9,6 +9,25 @@
         @named_tuple_converter
         def your_function() -> Iterable:
             # your function code
+
+    Logging:
+        The application creates a log level with a default
+        logging level of 'INFO'.  To set a different logging level,
+        set an environment variable named LOG_LEVEL to one of the
+        following case insensitive logging levels:
+
+        - FATAL
+        - ERROR
+        - CRITICAL
+        - WARN
+        - WARNING
+        - INFO
+        - NOTICE
+        - DEBUG
+        - TRACE
+
+        Example custom logging usage:
+            export LOG_LEVEL=DEBUG
 '''
 
 # Imports
@@ -17,12 +36,17 @@ from typing import Callable, Iterable, List, NamedTuple
 from functools import wraps
 from namedtuple_maker.namedtuple_logger import initialize_logging
 from re import compile, VERBOSE
-from os import _exit
+from os import _exit, getenv
 from sys import exit, stderr
 import logbook
 
+# Check for LOG_LEVEL environment variable
+log_level = getenv('LOG_LEVEL')
+
 # Initialize logging
-initialize_logging()
+initialize_logging(
+    log_level=log_level
+)
 
 # Log entry
 # Log the initialization of logging
