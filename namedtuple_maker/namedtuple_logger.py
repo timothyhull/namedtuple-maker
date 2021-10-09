@@ -86,6 +86,17 @@ def initialize_logging(
                 log_level.upper().strip()
             )
 
+    # Display logging level
+    log_level_message = (
+        f'** Logging level set to {logbook.get_level_name(log_level)} **'
+    )
+    log_level_message_border = f'\n{"-" * len(log_level_message)}\n'
+    print(
+        f'{log_level_message_border}'
+        f'{log_level_message}'
+        f'{log_level_message_border}'
+    )
+
     # Initialize logging
     logbook.TimedRotatingFileHandler(
         level=log_level,
