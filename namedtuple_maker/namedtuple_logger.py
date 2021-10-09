@@ -31,7 +31,7 @@ from os import path
 LOG_FILE_PATH = path.curdir
 LOG_FILE_NAME = 'namedtuple-log.log'
 LOG_FILE = path.join(LOG_FILE_PATH, LOG_FILE_NAME)
-LOG_LEVEL_DEFAULT = 'DEBUG'
+LOG_LEVEL_DEFAULT = 'INFO'
 LOG_LEVELS = (
     'FATAL',
     'ERROR',
