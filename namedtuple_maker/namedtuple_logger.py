@@ -25,8 +25,8 @@
 
 # Imports
 import logbook
-from os import path
-from sys import stdout
+from os import _exit, path
+from sys import exit, stderr, stdout
 
 # Constants
 LOG_FILE_PATH = path.curdir
@@ -78,14 +78,18 @@ def initialize_logging(
 
         # Confirm log level is valid
         if log_level not in LOG_LEVELS:
+
+            # Create an error meassage header
             error_message = (
                 f'The specified logging level "{log_level}" is invalid.\n'
                 f'Use one of the following values:\n'
             )
 
+            # Add valid choice output to the error message
             for index, level in enumerate(LOG_LEVELS):
                 error_message += (f'{index + 1}. {level}\n')
 
+            # Raise an exception and display the error message
             raise ValueError(
                 error_message
             )
@@ -107,24 +111,39 @@ def initialize_logging(
         f'{log_level_message_border}'
     )
 
-    # Initialize logging output
+    # Initialize logger and display message
     log_init_log = logbook.Logger('Logging Initializer')
-    log_init_log.info(
-        f'Initializing {logbook.get_level_name(log_level)} level logging.'
-    )
 
     # Determine logging target
     if log_to_console is False:
 
         # Initialize logging to log file
-        logbook.TimedRotatingFileHandler(
-            level=log_level,
-            filename=log_file
-        ).push_application()
+        try:
 
-        log_init_log.info(
-            f'Log file path and root name is {log_file}.'
-        )
+            # Start TimedRotatingFileHandler
+            logbook.TimedRotatingFileHandler(
+                level=log_level,
+                filename=log_file
+            ).push_application()
+
+            # Attempt to write message to log file
+            log_init_log.info(
+                f'Log file path and root name is {log_file}.'
+            )
+
+        except FileNotFoundError as e:
+            print(f'\n{e!r}\n', file=stderr)
+
+            # Graceful exit with status code
+            try:
+
+                # Standard sys.exit
+                exit(1)
+
+            except SystemExit:
+
+                # Exit from an interactive REPL shell with os._exit
+                _exit(1)
 
     else:
 
@@ -133,3 +152,13 @@ def initialize_logging(
             stream=stdout,
             level=log_level
         ).push_application()
+
+        # Display message to indicate console logging
+        log_init_log.info(
+            'Initialized logging to console.'
+        )
+
+    # Log message to indicate start of logging
+    log_init_log.info(
+        f'Started {logbook.get_level_name(log_level)} level logging.'
+    )
