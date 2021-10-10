@@ -26,6 +26,7 @@
 # Imports
 import logbook
 from os import path
+from sys import stdout
 
 # Constants
 LOG_FILE_PATH = path.curdir
@@ -47,13 +48,22 @@ LOG_LEVELS = (
 
 def initialize_logging(
     log_level: str = None,
-    log_file: str = LOG_FILE
+    log_file: str = LOG_FILE,
+    log_to_console: bool = False 
 ) -> None:
     ''' Perform logging initialization functions.
 
         Args:
-            level (str, optional):
+            log_level (str, optional):
                 Logging level/verbosity.
+
+            log_file (str, optional):
+                Path and file name to a target log file.
+                Example: ./logs/log-file.log
+
+            log_to_console (bool, optional):
+                Display log output to the console, instead of writing
+                log output to a file.
     '''
 
     # If no log level is passed as an argument, set a standard logging level
@@ -97,16 +107,29 @@ def initialize_logging(
         f'{log_level_message_border}'
     )
 
-    # Initialize logging
-    logbook.TimedRotatingFileHandler(
-        level=log_level,
-        filename=log_file
-    ).push_application()
-
+    # Initialize logging output
     log_init_log = logbook.Logger('Logging Initializer')
     log_init_log.info(
-        f'Initialized {logbook.get_level_name(log_level)} level logging.'
+        f'Initializing {logbook.get_level_name(log_level)} level logging.'
     )
-    log_init_log.info(
-        f'Log file path and root name is {log_file}.'
-    )
+
+    # Determine logging target
+    if log_to_console is False:
+
+        # Initialize logging to log file
+        logbook.TimedRotatingFileHandler(
+            level=log_level,
+            filename=log_file
+        ).push_application()
+
+        log_init_log.info(
+            f'Log file path and root name is {log_file}.'
+        )
+
+    else:
+
+        # Initialize logging to console
+        logbook.StreamHandler(
+            stream=stdout,
+            level=log_level
+        ).push_application()
