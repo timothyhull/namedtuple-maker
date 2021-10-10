@@ -49,7 +49,7 @@ LOG_LEVELS = (
 def initialize_logging(
     log_level: str = None,
     log_file: str = LOG_FILE,
-    log_to_console: bool = False 
+    log_to_console: bool = False
 ) -> None:
     ''' Perform logging initialization functions.
 
