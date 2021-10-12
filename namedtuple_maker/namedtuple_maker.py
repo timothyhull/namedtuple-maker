@@ -10,7 +10,7 @@
         def your_function() -> Iterable:
             # your function code
 
-    Logging:
+    Logging Level:
         The application creates a log level with a default
         logging level of 'INFO'.  To set a different logging level,
         set an environment variable named LOG_LEVEL to one of the
@@ -28,6 +28,15 @@
 
         Example custom logging usage:
             export LOG_LEVEL=DEBUG
+
+    Logging Target:
+        The application automatically creates a log file in the current
+        working directory, and writes log message to that file. To write log
+        messages to the console (STDOUT), set the LOG_TO_CONSOLE environment
+        variable to 'True'.
+
+        Example logging target usage:
+            export LOG_TO_CONSOLE=True
 '''
 
 # Imports
@@ -43,9 +52,13 @@ import logbook
 # Check for LOG_LEVEL environment variable
 log_level = getenv('LOG_LEVEL')
 
+# Check for the LOG_TO_CONSOLE environment variable
+log_to_console = bool(getenv('LOG_TO_CONSOLE'))
+
 # Initialize logging
 initialize_logging(
-    log_level=log_level
+    log_level=log_level,
+    log_to_console=log_to_console
 )
 
 # Log entry
