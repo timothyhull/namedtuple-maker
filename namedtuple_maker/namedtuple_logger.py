@@ -46,6 +46,27 @@ LOG_LEVELS = (
 )
 
 
+def graceful_exit() -> None:
+    ''' Gracefully exit after a caught exception.
+
+        Args:
+            None.
+
+        Returns:
+            None.
+    '''
+    # Graceful exit with status code
+    try:
+
+        # Standard sys.exit
+        exit(1)
+
+    except SystemExit:
+
+        # Exit from an interactive REPL shell with os._exit
+        _exit(1)
+
+
 def initialize_logging(
     log_level: str = None,
     log_file: str = LOG_FILE,
@@ -77,11 +98,11 @@ def initialize_logging(
     else:
 
         # Confirm log level is valid
-        if log_level not in LOG_LEVELS:
+        if log_level.upper().strip() not in LOG_LEVELS:
 
             # Create an error meassage header
             error_message = (
-                f'The specified logging level "{log_level}" is invalid.\n'
+                f'\nThe specified logging level "{log_level}" is invalid.\n'
                 f'Use one of the following values:\n'
             )
 
@@ -89,16 +110,16 @@ def initialize_logging(
             for index, level in enumerate(LOG_LEVELS):
                 error_message += (f'{index + 1}. {level}\n')
 
-            # Raise an exception and display the error message
-            raise ValueError(
-                error_message
-            )
+            # Display the error message and gracefully exit
+            print(error_message, file=stderr)
+            graceful_exit()
 
-        # Set logging level
-        log_level = getattr(
-                logbook,
-                log_level.upper().strip()
-            )
+        else:
+            # Set logging level
+            log_level = getattr(
+                    logbook,
+                    log_level.upper().strip()
+                )
 
     # Display logging level
     log_level_message = (
@@ -131,19 +152,10 @@ def initialize_logging(
                 f'Log file path and root name is {log_file}.'
             )
 
+        # Display error and gracefully exit
         except FileNotFoundError as e:
             print(f'\n{e!r}\n', file=stderr)
-
-            # Graceful exit with status code
-            try:
-
-                # Standard sys.exit
-                exit(1)
-
-            except SystemExit:
-
-                # Exit from an interactive REPL shell with os._exit
-                _exit(1)
+            graceful_exit()
 
     else:
 
