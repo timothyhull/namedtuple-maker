@@ -640,7 +640,7 @@ def make_named_tuple(
             f'\t{iterable_input}'
         )
 
-    except Exception as e:
+    except TypeError as e:
 
         # Set error message value
         error_message = (
