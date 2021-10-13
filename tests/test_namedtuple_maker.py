@@ -32,6 +32,9 @@ TEST_INVALID_ATTRIBUTE_NAMES_DATA = (
     '  4eye color !@'
 )
 
+# Create a test value for a non-iterable object
+TEST_INVALID_ITERABLE_OBJECT = 9
+
 # Capture the number of values in the TEST_DATA object
 TEST_DATA_LENGTH = len(TEST_DATA.values())
 
@@ -127,7 +130,7 @@ def test_named_tuple_converter_input(side_effects) -> None:
 
         Args:
             side_effects (unittest.mock.patch):
-                namedtuple attribute mock data for the input() function.
+                namedtuple attribute name mock data for the input() function.
 
         Returns:
             None.
@@ -227,3 +230,24 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
 
     # Verify the attribute names input equals the namedtuple attribute names
     assert tuple(att_return) == test_result._fields
+
+
+def test_named_tuple_converter_invalid_iterable_exception(capfd) -> None:
+    ''' Test of the named_tuple_converter decorator function for exception
+        handling, when the iterable_input argument contains a non-iterable
+        object/value.
+
+        Args:
+            capsys (pytest fixture):
+                Output stream to STDOUT and STDERR.
+
+        Returns:
+            None.
+    '''
+
+    make_named_tuple(
+        iterable_input=TEST_INVALID_ITERABLE_OBJECT,
+        auto_attribute_names=True
+    )
+
+    print(dir(capfd))
