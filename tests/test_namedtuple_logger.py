@@ -1,13 +1,16 @@
 #!/usr/bin/env pytest
 ''' Tests for namedtuple_logger.py
-    Requires logbook
+    Requires:
+        logbook
+        requires the pytest be run with the -s option
+
 '''
 
 # Imports
 from namedtuple_maker.namedtuple_logger import initialize_logging, \
                                                LOG_LEVELS, LOG_LEVEL_DEFAULT
+from logbook import Logger
 from pytest import mark
-import logbook
 
 # Constants
 LOG_INFO_MESSAGE = 'This is a log entry.'
@@ -32,7 +35,7 @@ def test_initialize_logging_to_console(capfd) -> None:
     '''
 
     # Create a logbook Logger
-    initialization_log = logbook.Logger('Initialization Log')
+    initialization_log = Logger('Initialization Log')
 
     # Initialize logging output to console
     initialize_logging(
@@ -41,11 +44,9 @@ def test_initialize_logging_to_console(capfd) -> None:
     )
 
     # Write log message to console
-    initialization_log.warning(LOG_INFO_MESSAGE)
+    i = initialization_log.info(LOG_INFO_MESSAGE)
+    print(i)
 
     # Validate log output to STDOUT
-    log_output = capfd.readouterr()[0]
-    log_output = log_output.replace('\n', ' ')
-    print(log_output)
-
-    assert 'entry' in log_output
+    log_output = capfd.readouterr().out
+    assert LOG_INFO_MESSAGE in log_output
