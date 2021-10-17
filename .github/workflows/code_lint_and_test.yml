@@ -72,11 +72,17 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements/requirements.txt
 
-      # Python tests with pytest
+      # Python application tests with pytest
       - name: Python application tests with pytest
         run: |
           export PYTHONPATH=$PYTHONPATH:${{ env.PYTHONPATH }}
-          pytest tests/
+          pytest tests/test_namedtuple_maker.py
+
+      # Python logging tests with pytest
+      - name: Python application tests with pytest
+        run: |
+          export PYTHONPATH=$PYTHONPATH:${{ env.PYTHONPATH }}
+          pytest -s tests/test_namedtuple_logger.py
 
   package-install:
     name: Test PyPI package installation

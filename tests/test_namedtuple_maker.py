@@ -9,8 +9,8 @@
 from namedtuple_maker.namedtuple_maker import named_tuple_converter, \
                                               make_named_tuple, TEST_DATA
 from collections import namedtuple
-from pytest import mark
-from typing import Iterable
+from pytest import mark, raises
+from typing import Iterable, Tuple
 from unittest.mock import patch
 
 # Constants
@@ -32,11 +32,42 @@ TEST_INVALID_ATTRIBUTE_NAMES_DATA = (
     '  4eye color !@'
 )
 
+# Create a test value for a non-iterable object
+TEST_INVALID_ITERABLE_OBJECT = 9
+
 # Capture the number of values in the TEST_DATA object
 TEST_DATA_LENGTH = len(TEST_DATA.values())
 
 # Create a set of auto-generated attribute names (TEST_DATA_LENGTH # of items)
 TEST_AUTO_ATTRIBUTE_NAME_DATA = (f'index_{i}' for i in range(TEST_DATA_LENGTH))
+
+
+# Create a custom function decorated with named_tuple_converter
+@named_tuple_converter
+def custom_namedtuple_function(
+    iterable_input: Iterable,
+    auto_attribute_names: bool
+) -> Tuple:
+    ''' Test function that accepts an iterable object as input,
+        and returns the iterable as a tuple object.
+
+        Args:
+            iterable_input (Iterable):
+                Iterable object to convert to a tuple object.
+
+            auto_attribute_names (bool):
+                Boolean to specify whether or not namedtuple attribute
+                names are automatically generated or provided as a
+                separate argument.
+
+        Returns:
+            iterable_input (Tuple):
+                Iterable object converted to tuple object.
+    '''
+
+    iterable_input = tuple(iterable_input)
+
+    return iterable_input
 
 
 @mark.parametrize(
@@ -127,7 +158,7 @@ def test_named_tuple_converter_input(side_effects) -> None:
 
         Args:
             side_effects (unittest.mock.patch):
-                namedtuple attribute mock data for the input() function.
+                namedtuple attribute name mock data for the input() function.
 
         Returns:
             None.
@@ -192,29 +223,8 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
             None.
     '''
 
-    # Create a custom function decorated with named_tuple_converter
-    @named_tuple_converter
-    def custom_function(
-        iterable_input: Iterable,
-        auto_attribute_names: bool
-    ) -> tuple:
-        ''' Test function that accepts an iterable object as input,
-            and returns the iterable as a tuple object.
-
-            Args:
-                iterable_input (Iterable):
-                    Iterable object to convert to a tuple object.
-
-                auto_attribute_names (bool):
-                    Boolean to specify whether or not namedtuple attribute
-                    names are automatically generated or provided as a
-                    separate argument.
-        '''
-
-        return tuple(iter_input)
-
-    # Get a namedtuple result to test
-    test_result = custom_function(
+    # Call the custom_namedtuple_function to get a namedtuple result to test
+    test_result = custom_namedtuple_function(
         iterable_input=iter_input,
         auto_attribute_names=True
     )
@@ -227,3 +237,23 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
 
     # Verify the attribute names input equals the namedtuple attribute names
     assert tuple(att_return) == test_result._fields
+
+
+def test_named_tuple_converter_invalid_iterable_exception() -> None:
+    ''' Test of the named_tuple_converter decorator function for exception
+        handling, when the iterable_input argument contains a non-iterable
+        object/value.
+
+        Args:
+            None.
+
+        Returns:
+            None.
+    '''
+
+    # Call the custom_namedtuple_function with invalid iterable data
+    with raises(TypeError):
+        custom_namedtuple_function(
+            iterable_input=TEST_INVALID_ITERABLE_OBJECT,
+            auto_attribute_names=True
+        )

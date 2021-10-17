@@ -9,6 +9,9 @@ ipython
 autopep8
 flake8
 
+# Python
+logbook
+
 # Python testing
 pytest
 pytest-cov
