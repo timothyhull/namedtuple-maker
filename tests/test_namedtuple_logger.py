@@ -1,8 +1,15 @@
 #!/usr/bin/env pytest
-''' Tests for namedtuple_logger.py
+''' pytest tests for namedtuple_logger.py
+
     Requires:
         logbook
-        requires the pytest be run with the -s option
+
+    Usage:
+        pytest -s tests/test_namedtuple_logger.py
+
+    Note:
+        Requires the use of the pytest -s option, to capture console
+        log output in STDOUT with capfd.
 
 '''
 
@@ -16,9 +23,9 @@ from pytest import mark
 LOG_INFO_MESSAGE = 'This is a log entry.'
 
 # Test initialize_logging
-    # Different logging levels
-    # Detault, manual valid, and manual invalid log files
-    # Test file and console logging
+# Different logging levels
+# Detault, manual valid, and manual invalid log files
+# Test file and console logging
 
 
 def test_initialize_logging_to_console(capfd) -> None:
