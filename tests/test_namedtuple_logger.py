@@ -14,17 +14,15 @@
 '''
 
 # Imports
-from namedtuple_maker.namedtuple_logger import initialize_logging, \
-                                               LOG_LEVELS, LOG_LEVEL_DEFAULT
+from namedtuple_maker.namedtuple_logger import initialize_logging
 from logbook import Logger
-from pytest import mark
+# from pytest import raises
 
 # Constants
+LOG_FILE_INVALID = './bad_log_test_dir/log_file.log'
 LOG_INFO_MESSAGE = 'This is a log entry.'
 
-# Test initialize_logging
-# Different logging levels
-# Detault, manual valid, and manual invalid log files
+# Default, manual valid, and manual invalid log files
 # Test file and console logging
 
 
@@ -57,3 +55,20 @@ def test_initialize_logging_to_console(capfd) -> None:
     # Validate log output to STDOUT
     log_output = capfd.readouterr().out
     assert LOG_INFO_MESSAGE in log_output
+
+
+# def test_initialize_logging_invalid_log_file() -> None:
+#     ''' Test initialize logging function's ability to handle an invalid
+#         log file path level.
+
+#         Args:
+#             None.
+
+#         Returns:
+#             None.
+#     '''
+
+#     with raises(FileNotFoundError):
+#         initialize_logging(
+#             log_file=LOG_FILE_INVALID
+#         )
