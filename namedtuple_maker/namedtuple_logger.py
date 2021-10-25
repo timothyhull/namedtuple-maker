@@ -9,7 +9,8 @@
         https://logbook.readthedocs.io/en/stable/
 
     Usage:
-        # Step 1, import the initialize_logging function into your application:
+        # Step 1, import the initialize_logging function into your
+        # application:
             from namedtuple_logger import initialize_logging()
             initialize_logging()
 
@@ -23,10 +24,15 @@
             app_log.info('Application logging started.')
 '''
 
-# Imports
+# Imports - Python Standard Library
+from os import path
+from sys import stdout
+
+# Imports - Third-Party
 import logbook
-from os import _exit, path
-from sys import exit, stderr, stdout
+
+# Imports - Local
+from graceful_exit import graceful_exit
 
 # Constants
 LOG_FILE_PATH = path.curdir
@@ -44,27 +50,6 @@ LOG_LEVELS = (
     'DEBUG',
     'TRACE'
 )
-
-
-def graceful_exit() -> None:
-    ''' Gracefully exit after a caught exception.
-
-        Args:
-            None.
-
-        Returns:
-            None.
-    '''
-    # Graceful exit with status code
-    try:
-
-        # Standard sys.exit
-        exit(1)
-
-    except SystemExit:
-
-        # Exit from an interactive REPL shell with os._exit
-        _exit(1)
 
 
 def initialize_logging(
@@ -111,8 +96,9 @@ def initialize_logging(
                 error_message += (f'{index + 1}. {level}\n')
 
             # Display the error message and gracefully exit
-            print(error_message, file=stderr)
-            graceful_exit()
+            graceful_exit(
+                error_message=error_message
+            )
 
         else:
             # Set logging level
@@ -154,8 +140,9 @@ def initialize_logging(
 
         # Display error and gracefully exit
         except FileNotFoundError as e:
-            print(f'\n{e!r}\n', file=stderr)
-            graceful_exit()
+            graceful_exit(
+                error_object=e,
+            )
 
     else:
 
@@ -174,3 +161,5 @@ def initialize_logging(
     log_init_log.info(
         f'Started {logbook.get_level_name(log_level)} level logging.'
     )
+
+    return None
