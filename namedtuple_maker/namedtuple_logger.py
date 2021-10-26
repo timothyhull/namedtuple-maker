@@ -32,7 +32,7 @@ from sys import stdout
 import logbook
 
 # Imports - Local
-from graceful_exit import graceful_exit
+from namedtuple_maker.namedtuple_utils import graceful_exit
 
 # Constants
 LOG_FILE_PATH = path.curdir
@@ -139,9 +139,9 @@ def initialize_logging(
             )
 
         # Display error and gracefully exit
-        except FileNotFoundError as e:
+        except FileNotFoundError as error:
             graceful_exit(
-                error_object=e,
+                error_object=error,
             )
 
     else:

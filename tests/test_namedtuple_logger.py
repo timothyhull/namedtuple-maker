@@ -13,10 +13,12 @@
 
 '''
 
-# Imports
-from namedtuple_maker.namedtuple_logger import initialize_logging
+# Imports - Third-Party
 from logbook import Logger
 # from pytest import raises
+
+# Imports - Local
+from namedtuple_maker.namedtuple_logger import initialize_logging
 
 # Constants
 LOG_FILE_INVALID = './bad_log_test_dir/log_file.log'
@@ -27,9 +29,9 @@ LOG_INFO_MESSAGE = 'This is a log entry.'
 
 
 def test_initialize_logging_to_console(capfd) -> None:
-    ''' Test initialize_logging function for console output.  Writes mock
-        log messages to the console and verifies the log messages display
-        correctly.
+    ''' Test initialize_logging function for console output.  Writes
+        mock log messages to the console and verifies the log messages
+        display correctly.
 
         Args:
             capfd (pytest fixture):
@@ -56,6 +58,8 @@ def test_initialize_logging_to_console(capfd) -> None:
     log_output = capfd.readouterr().out
     assert LOG_INFO_MESSAGE in log_output
 
+    return None
+
 
 # def test_initialize_logging_invalid_log_file() -> None:
 #     ''' Test initialize logging function's ability to handle an invalid
@@ -72,3 +76,4 @@ def test_initialize_logging_to_console(capfd) -> None:
 #         initialize_logging(
 #             log_file=LOG_FILE_INVALID
 #         )
+#     return None
