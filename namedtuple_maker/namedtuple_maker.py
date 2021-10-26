@@ -31,23 +31,27 @@
 
     Logging Target:
         The application automatically creates a log file in the current
-        working directory, and writes log message to that file. To write log
-        messages to the console (STDOUT), set the LOG_TO_CONSOLE environment
-        variable to 'True'.
+        working directory, and writes log message to that file. To
+        write log messages to the console (STDOUT), set the
+        LOG_TO_CONSOLE environment variable to 'True'.
 
         Example logging target usage:
             export LOG_TO_CONSOLE=True
 '''
 
-# Imports
+# Imports - Python Standard Library
 from collections import namedtuple
 from typing import Callable, Iterable, List, NamedTuple
 from functools import wraps
-from namedtuple_maker.namedtuple_logger import initialize_logging
 from re import compile, VERBOSE
-from os import _exit, getenv
-from sys import exit, stderr
+from os import getenv
+
+# Imports - Third-Party
 import logbook
+
+# Imports - Local
+from namedtuple_maker.namedtuple_logger import initialize_logging
+from namedtuple_maker.namedtuple_utils import graceful_exit
 
 # Check for LOG_LEVEL environment variable
 log_level = getenv('LOG_LEVEL')
@@ -260,16 +264,17 @@ def named_tuple_converter(function: Callable) -> Callable:
 
                     attribute_names (Iterable[str]):
                         Optional kwarg, any iterable object class
-                        including, list, tuple, dict_keys, dict_values, etc.
-                        with str values.
+                        including, list, tuple, dict_keys, dict_values,
+                        etc. with str values.
 
                     auto_attribute_names (bool):
                         Optional kwarg, automatically name attributes
-                        without user input or use of the attribute_names
-                        parameter. Default: False
+                        without user input or use of the
+                        attribute_names parameter. Default: False
 
             Returns: named_tuple (namedtuple):
-                Class NamedTuple instantiated from collections.namedtuple
+                Class NamedTuple instantiated from
+                collections.namedtuple
         '''
 
         # Log entry
@@ -587,8 +592,8 @@ def make_named_tuple(
                 Any iterable object to convert to a namedtuple.
 
             attribute_names (Iterable[str]):
-                Any iterable object of strings to supply field names for
-                a namedtuple.
+                Any iterable object of strings to supply field names
+                for a namedtuple.
 
             auto_attribute_names (bool):
                     Optional kwarg, automatically name attributes
@@ -640,7 +645,7 @@ def make_named_tuple(
             f'\t{iterable_input}'
         )
 
-    except TypeError as e:
+    except TypeError as error:
 
         # Set error message value
         error_message = (
@@ -655,22 +660,13 @@ def make_named_tuple(
             f'\t"iterable_input" value: {iterable_input}'
             f'\t"iterable_input" type: {type(iterable_input)}'
         )
-        application_log.exception(e)
+        application_log.exception(error)
 
-        # Write error message to STDERR
-        print(f'\n{error_message}')
-        print(f'{e!r}\n', file=stderr)
-
-        # Graceful exit with status code
-        try:
-
-            # Standard sys.exit
-            exit(1)
-
-        except SystemExit:
-
-            # Exit from an interactive REPL shell with os._exit
-            _exit(1)
+        # Display the error message and gracefully exit
+        graceful_exit(
+            error_message=error_message,
+            error_object=error
+        )
 
     # Log Entry
     # Log return of make_named_tuple function to named_tuple_converter
@@ -696,8 +692,9 @@ def run_make_named_tuple() -> NamedTuple:
 
         Returns:
             named_tuple (NamedTuple):
-                NamedTuple class object resulting from the make_named_tuple
-                function decorated by the named_tuple_converter function.
+                NamedTuple class object resulting from the
+                make_named_tuple function decorated by the
+                named_tuple_converter function.
     '''
 
     # Log Entry

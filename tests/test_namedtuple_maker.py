@@ -5,13 +5,17 @@
         pytest tests/test_namedtuple_maker.py
 '''
 
-# Imports
-from namedtuple_maker.namedtuple_maker import named_tuple_converter, \
-                                              make_named_tuple, TEST_DATA
+# Imports - Python Standard Library
 from collections import namedtuple
-from pytest import mark, raises
 from typing import Iterable, Tuple
 from unittest.mock import patch
+
+# Imports - Third-Party
+from pytest import mark, raises
+
+# Imports - Local
+from namedtuple_maker.namedtuple_maker import named_tuple_converter, \
+                                              make_named_tuple, TEST_DATA
 
 # Constants
 # Create a namedtuple object for synthetic testing
@@ -106,20 +110,23 @@ def test_named_tuple_converter(
     iter_return,
     att_return
 ) -> None:
-    ''' Test of the named_tuple_converter decorator function to determine if
-        the function accepts an iterable argument and returns a namedtuple
-        with the original iterable data values. Collect the namedtuple field
-        names from an iterable of names passed an argument.
+    ''' Test of the named_tuple_converter decorator function to
+        determine if the function accepts an iterable argument and
+        returns a namedtuple with the original iterable data values.
+        Collect the namedtuple field names from an iterable of names
+        passed an argument.
 
         Args:
             iter_input (Iterable):
-                Iterable input to be converted to namedtuple attribute values.
+                Iterable input to be converted to namedtuple attribute
+                values.
 
             att_names (Iterable):
                 Iterable input of namedtuple attribute names.
 
             iter_return (Iterable):
-                Iterable output of expected namedtuple attribute values.
+                Iterable output of expected namedtuple attribute
+                values.
 
             att_return (Iterable):
                 Iterable output of expected namedtuple attribute names.
@@ -151,14 +158,16 @@ def test_named_tuple_converter(
     side_effect=TEST_DATA.keys()
 )
 def test_named_tuple_converter_input(side_effects) -> None:
-    ''' Test of the named_tuple_converter decorator function to determine if
-        the function accepts an iterable argument and returns a namedtuple
-        with the original iterable data values. Collect the namedtuple
-        attribute names with the input() function.
+    ''' Test of the named_tuple_converter decorator function to
+        determine if the function accepts an iterable argument and
+        returns a namedtuple with the original iterable data values.
+        Collect the namedtuple attribute names with the input()
+        function.
 
         Args:
             side_effects (unittest.mock.patch):
-                namedtuple attribute name mock data for the input() function.
+                namedtuple attribute name mock data for the input()
+                function.
 
         Returns:
             None.
@@ -202,16 +211,18 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
     iter_return,
     att_return
 ) -> None:
-    ''' Test of the named_tuple_converter decorator function using a custom
-        function to determine if the function accepts an iterable argument
-        and returns a namedtuple with the original iterable data, and if the
-        decorator function automatically names the namedtuple attributes
-        with the auto_attribute_names parameter set to True. Collect the
-        namedtuple field names from an iterable of names passed an argument.
+    ''' Test of the named_tuple_converter decorator function using a
+        custom function to determine if the function accepts an
+        iterable argument and returns a namedtuple with the original
+        iterable data, and if the decorator function automatically
+        names the namedtuple attributes with the auto_attribute_names
+        parameter set to True. Collect the namedtuple field names from
+        an iterable of names passed an argument.
 
         Args:
             iter_input (Iterable):
-                Iterable input to be converted to namedtuple attribute values.
+                Iterable input to be converted to namedtuple attribute
+                values.
 
             att_names (Iterable):
                 Iterable input of namedtuple attribute names.
@@ -240,9 +251,9 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
 
 
 def test_named_tuple_converter_invalid_iterable_exception() -> None:
-    ''' Test of the named_tuple_converter decorator function for exception
-        handling, when the iterable_input argument contains a non-iterable
-        object/value.
+    ''' Test of the named_tuple_converter decorator function for
+        exception handling, when the iterable_input argument contains
+        a non-iterable object/value.
 
         Args:
             None.
