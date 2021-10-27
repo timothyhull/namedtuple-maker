@@ -2,7 +2,8 @@
 """ pytest tests for namedtuple_logger.py
 
     Requires:
-        logbook
+        Install Logbook with pip:
+            pip install Logbook
 
     Usage:
         pytest -s tests/test_namedtuple_logger.py
