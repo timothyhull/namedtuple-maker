@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-''' Convert an iterable object into a namedtuple using a decorator.
+""" Convert an iterable object into a namedtuple using a decorator.
     Provide the namedtuple attribute names in a kwarg of the decorated
     function, or enter attribute names at prompts.
 
@@ -37,7 +37,7 @@
 
         Example logging target usage:
             export LOG_TO_CONSOLE=True
-'''
+"""
 
 # Imports - Python Standard Library
 from collections import namedtuple

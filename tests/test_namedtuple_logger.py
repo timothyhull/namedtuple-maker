@@ -1,5 +1,5 @@
 #!/usr/bin/env pytest
-''' pytest tests for namedtuple_logger.py
+""" pytest tests for namedtuple_logger.py
 
     Requires:
         logbook
@@ -11,7 +11,7 @@
         Requires the use of the pytest -s option, to capture console
         log output in STDOUT with capfd.
 
-'''
+"""
 
 # Imports - Third-Party
 from logbook import Logger

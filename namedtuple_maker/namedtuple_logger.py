@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-''' Perform logging functions for namedtuple_maker.py
+""" Perform logging functions for namedtuple_maker.py
 
     Requirements:
         Install Logbook with pip:
@@ -22,7 +22,7 @@
 
         # Step 4, write log events to the log.
             app_log.info('Application logging started.')
-'''
+"""
 
 # Imports - Python Standard Library
 from os import path

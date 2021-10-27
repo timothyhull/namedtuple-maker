@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-''' Utility module with functions for the namedtuple-maker application.
+""" Utility module with functions for the namedtuple-maker application.
 
     Usage:
         See individual function docstrings for usage instructions.
-'''
+"""
 
 # Imports - Python Standard Library
 from os import _exit
