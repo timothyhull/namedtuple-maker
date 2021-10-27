@@ -1,9 +1,9 @@
 #!/usr/bin/env pytest
-''' pytest tests for namedtuple_maker.py
+""" pytest tests for namedtuple_maker.py
 
     Usage:
         pytest tests/test_namedtuple_maker.py
-'''
+"""
 
 # Imports - Python Standard Library
 from collections import namedtuple

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-''' Setup file for packaging.
-'''
+""" Setup file for packaging.
+"""
 
 # Imports
 import pathlib
