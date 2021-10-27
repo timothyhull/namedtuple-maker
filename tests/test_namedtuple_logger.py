@@ -29,7 +29,7 @@ LOG_INFO_MESSAGE = 'This is a log entry.'
 
 
 def test_initialize_logging_to_console(capfd) -> None:
-    ''' Test initialize_logging function for console output.  Writes
+    """ Test initialize_logging function for console output.  Writes
         mock log messages to the console and verifies the log messages
         display correctly.
 
@@ -39,7 +39,7 @@ def test_initialize_logging_to_console(capfd) -> None:
 
         Returns:
             None.
-    '''
+    """
 
     # Create a logbook Logger
     initialization_log = Logger('Initialization Log')
@@ -62,7 +62,7 @@ def test_initialize_logging_to_console(capfd) -> None:
 
 
 # def test_initialize_logging_invalid_log_file() -> None:
-#     ''' Test initialize logging function's ability to handle an invalid
+#     """ Test initialize logging function's ability to handle an invalid
 #         log file path level.
 
 #         Args:
@@ -70,7 +70,7 @@ def test_initialize_logging_to_console(capfd) -> None:
 
 #         Returns:
 #             None.
-#     '''
+#     """
 
 #     with raises(FileNotFoundError):
 #         initialize_logging(

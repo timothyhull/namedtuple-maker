@@ -15,7 +15,7 @@ def graceful_exit(
     error_message: AnyStr = None,
     error_object: Exception = None
 ):
-    ''' Gracefully exit a program after catching an exception.  Call the
+    """ Gracefully exit a program after catching an exception.  Call the
     graceful_exit function from within a higher-level except block.
     Instead of using the raise keyword to display a stack trace and
     exit, graceful_exit will display a friendly message, and exit the
@@ -59,7 +59,7 @@ def graceful_exit(
 
         Returns:
             N/A.
-    '''
+    """
 
     # Display the optional error message
     if error_message is not None:

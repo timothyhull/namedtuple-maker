@@ -52,7 +52,7 @@ def custom_namedtuple_function(
     iterable_input: Iterable,
     auto_attribute_names: bool
 ) -> Tuple:
-    ''' Test function that accepts an iterable object as input,
+    """ Test function that accepts an iterable object as input,
         and returns the iterable as a tuple object.
 
         Args:
@@ -67,7 +67,7 @@ def custom_namedtuple_function(
         Returns:
             iterable_input (Tuple):
                 Iterable object converted to tuple object.
-    '''
+    """
 
     iterable_input = tuple(iterable_input)
 
@@ -110,7 +110,7 @@ def test_named_tuple_converter(
     iter_return,
     att_return
 ) -> None:
-    ''' Test of the named_tuple_converter decorator function to
+    """ Test of the named_tuple_converter decorator function to
         determine if the function accepts an iterable argument and
         returns a namedtuple with the original iterable data values.
         Collect the namedtuple field names from an iterable of names
@@ -133,7 +133,7 @@ def test_named_tuple_converter(
 
         Returns:
             None.
-    '''
+    """
 
     # Get a namedtuple result to test
     test_result = make_named_tuple(
@@ -158,7 +158,7 @@ def test_named_tuple_converter(
     side_effect=TEST_DATA.keys()
 )
 def test_named_tuple_converter_input(side_effects) -> None:
-    ''' Test of the named_tuple_converter decorator function to
+    """ Test of the named_tuple_converter decorator function to
         determine if the function accepts an iterable argument and
         returns a namedtuple with the original iterable data values.
         Collect the namedtuple attribute names with the input()
@@ -171,7 +171,7 @@ def test_named_tuple_converter_input(side_effects) -> None:
 
         Returns:
             None.
-    '''
+    """
 
     # Get a namedtuple result to test
     test_result = make_named_tuple(
@@ -211,7 +211,7 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
     iter_return,
     att_return
 ) -> None:
-    ''' Test of the named_tuple_converter decorator function using a
+    """ Test of the named_tuple_converter decorator function using a
         custom function to determine if the function accepts an
         iterable argument and returns a namedtuple with the original
         iterable data, and if the decorator function automatically
@@ -232,7 +232,7 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
 
         Returns:
             None.
-    '''
+    """
 
     # Call the custom_namedtuple_function to get a namedtuple result to test
     test_result = custom_namedtuple_function(
@@ -251,7 +251,7 @@ def test_named_tuple_converter_custom_function_auto_name_attributes(
 
 
 def test_named_tuple_converter_invalid_iterable_exception() -> None:
-    ''' Test of the named_tuple_converter decorator function for
+    """ Test of the named_tuple_converter decorator function for
         exception handling, when the iterable_input argument contains
         a non-iterable object/value.
 
@@ -260,7 +260,7 @@ def test_named_tuple_converter_invalid_iterable_exception() -> None:
 
         Returns:
             None.
-    '''
+    """
 
     # Call the custom_namedtuple_function with invalid iterable data
     with raises(TypeError):

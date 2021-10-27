@@ -57,7 +57,7 @@ def initialize_logging(
     log_file: str = LOG_FILE,
     log_to_console: bool = False
 ) -> None:
-    ''' Perform logging initialization functions.
+    """ Perform logging initialization functions.
 
         Args:
             log_level (str, optional):
@@ -70,7 +70,7 @@ def initialize_logging(
             log_to_console (bool, optional):
                 Display log output to the console, instead of writing
                 log output to a file.
-    '''
+    """
 
     # If no log level is passed as an argument, set a standard logging level
     if log_level is None:

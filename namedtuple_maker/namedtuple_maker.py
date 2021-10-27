@@ -138,7 +138,7 @@ application_log.debug(
 def validate_attribute_input(
     attribute_names: List
 ) -> List:
-    ''' Validate or generate attribute names for a namedtuple.
+    """ Validate or generate attribute names for a namedtuple.
 
         Args:
             attribute_names (List):
@@ -147,7 +147,7 @@ def validate_attribute_input(
         Returns:
             attribute_names (List):
                 Refined list of namedtuple attribute names.
-    '''
+    """
 
     # Log entry
     # Log start of attribute name validation
@@ -226,7 +226,7 @@ def validate_attribute_input(
 
 
 def named_tuple_converter(function: Callable) -> Callable:
-    ''' Decorator function to convert an iterable into a namedtuple object.
+    """ Decorator function to convert an iterable into a namedtuple object.
 
         Args:
             function (Callable):
@@ -235,7 +235,7 @@ def named_tuple_converter(function: Callable) -> Callable:
         Returns:
             convert_to_namedtuple (Callable):
                 Decorated function
-    '''
+    """
 
     # Log entry
     # Log the start of the decorator function
@@ -254,7 +254,7 @@ def named_tuple_converter(function: Callable) -> Callable:
     # Use @wraps to preserve the docstring of the function to decorate
     @wraps(function)
     def convert_to_namedtuple(*args, **kwargs) -> namedtuple:
-        ''' Perform conversion of an iterable to a namedtuple.
+        """ Perform conversion of an iterable to a namedtuple.
 
             Args:
                 kwargs:
@@ -275,7 +275,7 @@ def named_tuple_converter(function: Callable) -> Callable:
             Returns: named_tuple (namedtuple):
                 Class NamedTuple instantiated from
                 collections.namedtuple
-        '''
+        """
 
         # Log entry
         # Log the start of the function decorated by @wraps
@@ -585,7 +585,7 @@ def make_named_tuple(
     attribute_names: Iterable[str] = None,
     auto_attribute_names: bool = False
 ) -> tuple:
-    ''' Function to consume the tuple_converter decorator function.
+    """ Function to consume the tuple_converter decorator function.
 
         Args:
             iterable_input (Iterable):
@@ -603,7 +603,7 @@ def make_named_tuple(
         Returns:
             tuple_output (tuple):
                 A tuple object of the iterable_input
-    '''
+    """
 
     # Log entry
     # Log the start of the make_named_tuple function
@@ -684,7 +684,7 @@ def make_named_tuple(
 
 
 def run_make_named_tuple() -> NamedTuple:
-    ''' Function to run the decorated make_named_tuple function using
+    """ Function to run the decorated make_named_tuple function using
         TEST_DATA as a test iterable.
 
         Args:
@@ -695,7 +695,7 @@ def run_make_named_tuple() -> NamedTuple:
                 NamedTuple class object resulting from the
                 make_named_tuple function decorated by the
                 named_tuple_converter function.
-    '''
+    """
 
     # Log Entry
     # Log the start of the run_make_named_tuple function
