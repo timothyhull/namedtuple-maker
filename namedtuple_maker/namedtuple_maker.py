@@ -96,7 +96,7 @@
         would be invalid.
 
     Logging:
-    
+
         Logging Level:
             The application creates a log level with a default
             logging level of 'INFO'.  To set a different logging level,
