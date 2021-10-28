@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-""" Perform logging functions for namedtuple_maker.py
+""" Perform logging functions for the namedtuple_maker.py module.
+
+    Imports the Logbook module (see 'Requirements' section below),
+    initializes application logging to a file or STDOUT, and displays
+    the configured log level in STDOUT.
 
     Requirements:
         Install Logbook with pip:
@@ -57,7 +61,16 @@ def initialize_logging(
     log_file: str = LOG_FILE,
     log_to_console: bool = False
 ) -> None:
-    """ Perform logging initialization functions.
+    """ Perform logging initialization.
+
+        Starts application logging at a default level or, optionally,
+        a specific level by keyword argument.  Log entries write to an
+        automatically-named time-rotating file series by default.  A
+        specific file name may be set manually by keyword argument.
+        Optionally supports logging to STDOUT by keyword argument.
+
+        Raises an exception if the path to a manually set log file is
+        not found.
 
         Args:
             log_level (str, optional):
