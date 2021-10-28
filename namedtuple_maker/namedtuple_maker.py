@@ -1,42 +1,129 @@
 #!/usr/bin/env python3
-""" Convert an iterable object into a namedtuple using a decorator.
-    Provide the namedtuple attribute names in a kwarg of the decorated
-    function, or enter attribute names at prompts.
+""" Convert iterable objects into namedtuple objects using a decorator.
+
+    Converts Python iterable objects (list, tuple, set, etc.) into
+    namedtuple objects using a decorator function, so you don't have to
+    rewrite code that already returns iterable objects.
+
+    Installation:
+        Install from PyPi - https://pypi.org/project/namedtuple-maker/
+            pip install namedtuple-maker
 
     Usage:
         from namedtuple_maker.namedtuple_maker import named_tuple_converter
 
-        @named_tuple_converter
-        def your_function() -> Iterable:
-            # your function code
+        Each index of the iterable object becomes a value in a new
+        namedtuple object.  The namedtuple attribute names may be set
+        in one of three ways:
 
-    Logging Level:
-        The application creates a log level with a default
-        logging level of 'INFO'.  To set a different logging level,
-        set an environment variable named LOG_LEVEL to one of the
-        following case insensitive logging levels:
+            1. Entering attribute names at input prompts (default).
 
-        - FATAL
-        - ERROR
-        - CRITICAL
-        - WARN
-        - WARNING
-        - INFO
-        - NOTICE
-        - DEBUG
-        - TRACE
+                # Example iterable object
+                my_object = [1, 2, 3]
 
-        Example custom logging usage:
-            export LOG_LEVEL=DEBUG
+                # Decorate a function that returns an Iterable object
+                @named_tuple_converter
+                def my_function(
+                    iterable_input):
 
-    Logging Target:
-        The application automatically creates a log file in the current
-        working directory, and writes log message to that file. To
-        write log messages to the console (STDOUT), set the
-        LOG_TO_CONSOLE environment variable to 'True'.
+                    return iterable_input
 
-        Example logging target usage:
-            export LOG_TO_CONSOLE=True
+                # Call the decorated function
+                my_namedtuple = my_function(
+                    iterable_input=my_object
+                )
+                    # Follow prompts to assign attribute names
+                    Enter an attribute name for the value "1": a
+                    Enter an attribute name for the value "2": b
+                    Enter an attribute name for the value "3": c
+
+                # Review the namedtuple_object
+                my_namedtuple
+                NamedTuple(a=1, b=2, c=3)
+
+            2. Manually, by passing an iterable object of attribute names
+            as a keyword argument to the decorated function.
+
+                # Example iterable object
+                my_object = [1, 2, 3]
+
+                # Example attribute names
+                my_attribute_names = ['a', 'b', 'c']
+
+                # Decorate a function that returns an Iterable object
+                @named_tuple_converter
+                def my_function(
+                    iterable_input,
+                    attribute_names):
+
+                    return iterable_input
+
+                # Call the decorated function
+                my_namedtuple = my_function(
+                    iterable_input=my_object,
+                    attribute_names=my_attribute_names
+                )
+
+                # Review the namedtuple_object
+                my_namedtuple
+                NamedTuple(a=1, b=2, c=3)
+
+            3. Setting a keyword argument to automatically generate
+            attribute names.
+
+                # Example iterable object
+                my_object = [1, 2, 3]
+
+                # Decorate a function that returns an Iterable object
+                @named_tuple_converter
+                def my_function(
+                    iterable_input,
+                    auto_attribute_names):
+
+                    return iterable_input
+
+                # Call the decorated function
+                my_namedtuple = my_function(
+                    iterable_input=my_object,
+                    auto_attribute_names=True
+                )
+
+                # Review the namedtuple_object
+                my_namedtuple
+                NamedTuple(index_0=1, index_1=2, index_2=3)
+
+        The program automatically corrects attribute name entries that
+        would be invalid.
+
+    Logging:
+    
+        Logging Level:
+            The application creates a log level with a default
+            logging level of 'INFO'.  To set a different logging level,
+            set an environment variable named LOG_LEVEL to one of the
+            following case insensitive logging levels:
+
+            - FATAL
+            - ERROR
+            - CRITICAL
+            - WARN
+            - WARNING
+            - INFO
+            - NOTICE
+            - DEBUG
+            - TRACE
+
+            Example custom logging usage:
+                export LOG_LEVEL=DEBUG
+
+        Logging Target:
+            The application automatically creates a log file in the current
+            working directory, and writes log message to that file. To
+            write log messages to the console (STDOUT), set the
+            LOG_TO_CONSOLE environment variable to 'True'.
+
+            Example logging target usage:
+                export LOG_TO_CONSOLE=True
 """
 
 # Imports - Python Standard Library

@@ -18,9 +18,13 @@
 
 ### Capabilities
 
-- Converts Python iterable objects (`list`, `tuple`, `set`, etc.) into a `namedtuple` objects using a decorator function, **so you don't have to rewrite code that already returns iterable objects**.
+- Converts Python iterable objects (`list`, `tuple`, `set`, etc.) into `namedtuple` objects using a decorator function, **so you don't have to rewrite code that already returns iterable objects**.
 
-- Gathers `namedtuple` attribute names via either a `kwarg` in a decorated function or using prompts to collect attribute names.
+- Sets `namedtuple` attribute names in one of three ways:
+
+    1. Entering attribute names at input prompts (default).
+    2. Manually, by passing an iterable object of attribute names as a keyword argument to the decorated function.
+    3. Setting a keyword argument to automatically generate attribute names.
 
 - Automatically corrects attribute name entries that would be invalid.
 
