@@ -15,11 +15,12 @@ def graceful_exit(
     error_message: AnyStr = None,
     error_object: Exception = None
 ):
-    """ Gracefully exit a program after catching an exception.  Call the
-    graceful_exit function from within a higher-level except block.
-    Instead of using the raise keyword to display a stack trace and
-    exit, graceful_exit will display a friendly message, and exit the
-    program without displaying full trace stack details.
+    """ Gracefully exit a program after catching an exception.
+
+    Call the graceful_exit function from within a higher-level except
+    block. Instead of using the raise keyword to display a stack trace
+    and exit, graceful_exit will display a friendly message, and exit
+    the program without displaying full trace stack details.
 
     The graceful_exit function first attempts to use the sys.exit
     function to exit the application.  If sys.exit raises a
