@@ -41,8 +41,8 @@
                 my_namedtuple
                 NamedTuple(a=1, b=2, c=3)
 
-            2. Manually, by passing an iterable object of attribute names
-            as a keyword argument to the decorated function.
+            2. Manually, by passing an iterable object of attribute
+            names as a keyword argument to the decorated function.
 
                 # Example iterable object
                 my_object = [1, 2, 3]
@@ -117,10 +117,10 @@
                 export LOG_LEVEL=DEBUG
 
         Logging Target:
-            The application automatically creates a log file in the current
-            working directory, and writes log message to that file. To
-            write log messages to the console (STDOUT), set the
-            LOG_TO_CONSOLE environment variable to 'True'.
+            The application automatically creates a log file in the
+            current working directory, and writes log message to that
+            file. To write log messages to the console (STDOUT), set
+            the LOG_TO_CONSOLE environment variable to 'True'.
 
             Example logging target usage:
                 export LOG_TO_CONSOLE=True
@@ -226,6 +226,10 @@ def validate_attribute_input(
     attribute_names: List
 ) -> List:
     """ Validate or generate attribute names for a namedtuple.
+
+        Checks each attribute name for validity, automatically
+        replacing invalid characters plus leading, trailing spaces, and
+        mid-value spaces.
 
         Args:
             attribute_names (List):
