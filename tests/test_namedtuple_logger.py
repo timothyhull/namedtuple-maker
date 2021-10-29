@@ -65,7 +65,7 @@ def test_initialize_logging_to_console(capfd) -> None:
 
 # def test_initialize_logging_invalid_log_file() -> None:
 #     """ Test logging initialization.
-# 
+
 #         Test the initialize_logging function's ability to handle an
 #         invalid log file path level.
 
