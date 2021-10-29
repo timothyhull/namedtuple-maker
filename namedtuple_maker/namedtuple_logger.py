@@ -42,17 +42,16 @@ from namedtuple_maker.namedtuple_utils import graceful_exit
 LOG_FILE_PATH = path.curdir
 LOG_FILE_NAME = 'namedtuple-log.log'
 LOG_FILE = path.join(LOG_FILE_PATH, LOG_FILE_NAME)
-LOG_LEVEL_DEFAULT = 'INFO'
+LOG_LEVEL_DEFAULT = 'CRITICAL'
 LOG_LEVELS = (
-    'FATAL',
-    'ERROR',
     'CRITICAL',
-    'WARN',
+    'ERROR',
     'WARNING',
-    'INFO',
     'NOTICE',
+    'INFO',
     'DEBUG',
-    'TRACE'
+    'TRACE',
+    'NOTSET'
 )
 
 
@@ -158,7 +157,6 @@ def initialize_logging(
             )
 
     else:
-
         # Initialize logging to console
         logbook.StreamHandler(
             stream=stdout,

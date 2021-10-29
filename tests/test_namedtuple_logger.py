@@ -30,9 +30,10 @@ LOG_INFO_MESSAGE = 'This is a log entry.'
 
 
 def test_initialize_logging_to_console(capfd) -> None:
-    """ Test initialize_logging function for console output.  Writes
-        mock log messages to the console and verifies the log messages
-        display correctly.
+    """ Test initialize_logging function for console output.
+
+        Writes mock log messages to the console and verifies the log
+        messages display correctly.
 
         Args:
             capfd (pytest fixture):
@@ -63,8 +64,10 @@ def test_initialize_logging_to_console(capfd) -> None:
 
 
 # def test_initialize_logging_invalid_log_file() -> None:
-#     """ Test initialize logging function's ability to handle an invalid
-#         log file path level.
+#     """ Test logging initialization.
+
+#         Test the initialize_logging function's ability to handle an
+#         invalid log file path level.
 
 #         Args:
 #             None.
