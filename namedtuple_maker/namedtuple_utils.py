@@ -8,11 +8,10 @@
 # Imports - Python Standard Library
 from os import _exit
 from sys import exit, stderr
-from typing import AnyStr
 
 
 def graceful_exit(
-    error_message: AnyStr = None,
+    error_message: str = None,
     error_object: Exception = None
 ):
     """ Gracefully exit a program after catching an exception.
@@ -29,7 +28,7 @@ def graceful_exit(
     will use the os._exit function.
 
     Args:
-        error_message (AnyStr, optional):
+        error_message (str, optional):
             String error message to display.
 
         error_object (Exception):
