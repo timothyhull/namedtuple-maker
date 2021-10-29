@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 """ Convert an iterable object into a namedtuple using a decorator.
-    Provide the namedtuple attribute names in a kwarg of the decorated
+
+    Provide  namedtuple attribute names in a kwarg of the decorated
     function, or enter attribute names at prompts.
+
+    Requirements:
+        Install Logbook with pip:
+            pip install Logbook
+
+        https://pypi.org/project/Logbook/
+        https://logbook.readthedocs.io/en/stable/
 
     Usage:
         from namedtuple_maker.namedtuple_maker import named_tuple_converter
@@ -12,19 +20,18 @@
 
     Logging Level:
         The application creates a log level with a default
-        logging level of 'INFO'.  To set a different logging level,
+        logging level of 'CRITICAL'.  To set a different logging level,
         set an environment variable named LOG_LEVEL to one of the
         following case insensitive logging levels:
 
-        - FATAL
-        - ERROR
         - CRITICAL
-        - WARN
+        - ERROR
         - WARNING
-        - INFO
         - NOTICE
+        - INFO
         - DEBUG
         - TRACE
+        - NOTSET
 
         Example custom logging usage:
             export LOG_LEVEL=DEBUG
@@ -43,8 +50,8 @@
 from collections import namedtuple
 from typing import Callable, Iterable, List, NamedTuple
 from functools import wraps
-from re import compile, VERBOSE
 from os import getenv
+import re
 
 # Imports - Third-Party
 import logbook
@@ -72,13 +79,13 @@ application_log.info('Start Application Log.')
 
 # Constants
 # Match pattern for allowed first characters in a namedtuple attribute
-ATTRIBUTE_INPUT_START_CHARACTER = compile(
+ATTRIBUTE_INPUT_START_CHARACTER = re.compile(
     r'''
     ^          # Start at the beginning of the line
     [^a-zA-Z]  # Any non-alphabet character
     +          # One or more repetitions
     ''',
-    VERBOSE
+    re.VERBOSE
 )
 
 # Log entry
@@ -89,11 +96,11 @@ application_log.debug(
 )
 
 # Match pattern for allowed non-first characters in a namedtuple attribute
-ATTRIBUTE_INPUT_INVALID_CHARACTERS = compile(
+ATTRIBUTE_INPUT_INVALID_CHARACTERS = re.compile(
     r'''
     [^\w\s_-]    # Only allow alphabet letters, integers, _, -, and spaces
     ''',
-    VERBOSE
+    re.VERBOSE
 )
 
 # Log entry
@@ -104,11 +111,11 @@ application_log.debug(
 )
 
 # Match pattern to replace space characters in a namedtuple attribute
-ATTRIBUTE_INPUT_SPACE_CHARACTERS = compile(
+ATTRIBUTE_INPUT_SPACE_CHARACTERS = re.compile(
     r'''
     \s            # Any space character
     ''',
-    VERBOSE
+    re.VERBOSE
 )
 
 # Log entry
