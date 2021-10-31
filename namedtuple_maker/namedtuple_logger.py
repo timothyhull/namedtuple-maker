@@ -39,7 +39,7 @@ import logbook
 from namedtuple_maker.namedtuple_utils import graceful_exit
 
 # Constants
-LOG_FILE_PATH = path.curdir
+LOG_FILE_PATH = path.dirname(__file__)
 LOG_FILE_NAME = 'namedtuple-log.log'
 LOG_FILE = path.join(LOG_FILE_PATH, LOG_FILE_NAME)
 LOG_LEVEL_DEFAULT = 'CRITICAL'
